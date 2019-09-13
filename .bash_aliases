@@ -37,3 +37,7 @@ alias vagrant='~/BSP/Semester_1/Vagrant_VM/missaleneous/Vagrant_download/vagrant
 
 # git alias for dotfiles
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
+alias config-s='config status'
+alias config-a='config add'
+alias config-c='config commit -m'
+alias config-p='config push'
