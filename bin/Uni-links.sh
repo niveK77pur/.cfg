@@ -7,7 +7,8 @@ args="--new-window"
 # links:
 intranet="https://intrastudent.uni.lu"
 re_enrolment="https://wwwen.uni.lu/students/useful_information_from_a_to_z"
-owa="https://owa.uni.lu"
+# owa="https://owa.uni.lu"
+owa="https://outlook.office365.com/owa/uniluxembourg.onmicrosoft.com/0180556255@uniluxembourg.mail.onmicrosoft.com/"
 guichet_etudiant="https://inscription.uni.lu/Inscriptions/Student/GuichetEtudiant"
 
 moodle="https://moodle.uni.lu/course/index.php?categoryid=438"
