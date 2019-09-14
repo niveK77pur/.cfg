@@ -178,15 +178,6 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning \
     -B 'Yes, exit i3' 'i3-msg exit' \
     "
 
-# poweroff, reboot, suspend. hibernate machine
-bindsym $mod+F12 exec "i3-nagbar -t warning \
-    -m 'Power off machine?' \
-    -B 'Poweroff'   'systemctl poweroff' \
-    -B 'Reboot'     'systemctl reboot' \
-    -B 'Suspend'    'systemctl suspend' \
-    -B 'Hibernate'  'systemctl hibernate' \
-    "
-
 # }}}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                     Modes
@@ -194,8 +185,8 @@ bindsym $mod+F12 exec "i3-nagbar -t warning \
 # {{{
 
 # various operations on screen
-bindsym $mod+o mode "screen-ops"
-mode "screen-ops" {
+bindsym $mod+x mode "window-ops"
+mode "window-ops" {
     # These bindings trigger as soon as you enter the resize mode
 
     # Pressing left will shrink the window’s width.
@@ -219,24 +210,56 @@ mode "screen-ops" {
     # take a screenshot
     bindsym --release s exec --no-startup-id "import ~/Pictures/i3screenshot.jpg"; mode "default"
 
+    # back to normal
+    bindsym Return  mode "default"
+    bindsym Escape  mode "default"
+    bindsym x       mode "default"
+}
+
+bindsym $mod+o mode "system-ops"
+mode "system-ops" {
     # screen brightness
-    bindsym 1 exec xbacklight -set 10
-    bindsym 2 exec xbacklight -set 20
-    bindsym 3 exec xbacklight -set 30
-    bindsym 4 exec xbacklight -set 40
-    bindsym 5 exec xbacklight -set 50
-    bindsym 6 exec xbacklight -set 60
-    bindsym 7 exec xbacklight -set 70
-    bindsym 8 exec xbacklight -set 80
-    bindsym 9 exec xbacklight -set 90
-    bindsym 0 exec xbacklight -set 100
+    bindsym 1 exec --no-startup-id  xbacklight -set  10
+    bindsym 2 exec --no-startup-id  xbacklight -set  20
+    bindsym 3 exec --no-startup-id  xbacklight -set  30
+    bindsym 4 exec --no-startup-id  xbacklight -set  40
+    bindsym 5 exec --no-startup-id  xbacklight -set  50
+    bindsym 6 exec --no-startup-id  xbacklight -set  60
+    bindsym 7 exec --no-startup-id  xbacklight -set  70
+    bindsym 8 exec --no-startup-id  xbacklight -set  80
+    bindsym 9 exec --no-startup-id  xbacklight -set  90
+    bindsym 0 exec --no-startup-id  xbacklight -set 100
+
+    # system volume
+    bindsym $mod+1 exec --no-startup-id     amixer -qD pulse sset Master  10%
+    bindsym $mod+2 exec --no-startup-id     amixer -qD pulse sset Master  20%
+    bindsym $mod+3 exec --no-startup-id     amixer -qD pulse sset Master  30%
+    bindsym $mod+4 exec --no-startup-id     amixer -qD pulse sset Master  40%
+    bindsym $mod+5 exec --no-startup-id     amixer -qD pulse sset Master  50%
+    bindsym $mod+6 exec --no-startup-id     amixer -qD pulse sset Master  60%
+    bindsym $mod+7 exec --no-startup-id     amixer -qD pulse sset Master  70%
+    bindsym $mod+8 exec --no-startup-id     amixer -qD pulse sset Master  80%
+    bindsym $mod+9 exec --no-startup-id     amixer -qD pulse sset Master  90%
+    bindsym $mod+0 exec --no-startup-id     amixer -qD pulse sset Master 100%
+    bindsym m      exec --no-startup-id     amixer -qD pulse sset Master mute
+    bindsym $mod+m exec --no-startup-id     amixer -qD pulse sset Master unmute
+    bindsym t      exec --no-startup-id     amixer -qD pulse sset Master toggle
+
+    # poweroff, reboot, suspend. hibernate machine
+    bindsym control+p exec "i3-nagbar -t warning \
+        -m 'Power off machine?' \
+        -B 'Poweroff'   'systemctl poweroff' \
+        -B 'Reboot'     'systemctl reboot' \
+        -B 'Suspend'    'systemctl suspend' \
+        -B 'Hibernate'  'systemctl hibernate' \
+        "
 
     # back to normal
     bindsym Return  mode "default"
     bindsym Escape  mode "default"
-    bindsym $mod+o  mode "default"
     bindsym o       mode "default"
 }
+
 
 # }}}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
