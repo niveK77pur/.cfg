@@ -186,7 +186,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning \
 
 # various operations on screen
 bindsym $mod+x mode "window-ops"
-mode "window-ops" {
+mode "window-ops" { #{{{
     # These bindings trigger as soon as you enter the resize mode
 
     # Pressing left will shrink the window’s width.
@@ -214,10 +214,10 @@ mode "window-ops" {
     bindsym Return  mode "default"
     bindsym Escape  mode "default"
     bindsym x       mode "default"
-}
+} #}}}
 
 bindsym $mod+o mode "system-ops"
-mode "system-ops" {
+mode "system-ops" { #{{{
     # screen brightness
     bindsym 1 exec --no-startup-id  xbacklight -set  10
     bindsym 2 exec --no-startup-id  xbacklight -set  20
@@ -248,23 +248,27 @@ mode "system-ops" {
     # show system info
     bindsym --release i exec --no-startup-id notify-send \
         "Brightness: $(xbacklight)\n$(amixer -D pulse sget Master \
-        | awk -F ' ' '$6 == "[on]" || $6 == "[off]" {print "Volume: " $1 " " $2 " " $5 " " $6}')"
+        | awk -F ' ' '$6 == "[on]" || $6 == "[off]" {print "Volume " $1 " " $2 " " $5 " " $6}')"
     
 
     # poweroff, reboot, suspend. hibernate machine
-    bindsym control+p exec "i3-nagbar -t warning \
+    bindsym control+p exec systemctl poweroff
+    bindsym control+r exec systemctl reboot
+    bindsym control+s exec i3lock && systemctl suspend
+    bindsym control+h exec i3lock && systemctl hibernate
+    bindsym control+F12 exec "i3-nagbar -t warning \
         -m 'Power off machine?' \
         -B 'Poweroff'   'systemctl poweroff' \
         -B 'Reboot'     'systemctl reboot' \
-        -B 'Suspend'    'systemctl suspend' \
-        -B 'Hibernate'  'systemctl hibernate' \
+        -B 'Suspend'    'i3lock && systemctl suspend' \
+        -B 'Hibernate'  'i3lock && systemctl hibernate' \
         "
 
     # back to normal
     bindsym Return  mode "default"
     bindsym Escape  mode "default"
     bindsym o       mode "default"
-}
+} #}}}
 
 
 # }}}
