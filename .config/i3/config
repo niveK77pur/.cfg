@@ -254,14 +254,14 @@ mode "system-ops" { #{{{
     # poweroff, reboot, suspend. hibernate machine
     bindsym control+p exec systemctl poweroff
     bindsym control+r exec systemctl reboot
-    bindsym control+s exec i3lock && systemctl suspend
-    bindsym control+h exec i3lock && systemctl hibernate
+    bindsym control+s mode "default"; exec i3lock && systemctl suspend
+    bindsym control+h mode "default"; exec i3lock && systemctl hibernate
     bindsym control+F12 exec "i3-nagbar -t warning \
         -m 'Power off machine?' \
         -B 'Poweroff'   'systemctl poweroff' \
         -B 'Reboot'     'systemctl reboot' \
-        -B 'Suspend'    'i3lock && systemctl suspend' \
-        -B 'Hibernate'  'i3lock && systemctl hibernate' \
+        -B 'Suspend'    'i3-msg mode "default"; i3lock && systemctl suspend' \
+        -B 'Hibernate'  'i3-msg mode "default"; i3lock && systemctl hibernate' \
         "
 
     # back to normal
