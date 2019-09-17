@@ -11,7 +11,7 @@ re_enrolment="https://wwwen.uni.lu/students/useful_information_from_a_to_z"
 owa="https://outlook.office365.com/owa/uniluxembourg.onmicrosoft.com/0180556255@uniluxembourg.mail.onmicrosoft.com/"
 guichet_etudiant="https://inscription.uni.lu/Inscriptions/Student/GuichetEtudiant"
 
-moodle="https://moodle.uni.lu/course/index.php?categoryid=438"
+moodle="https://moodle.uni.lu/course/index.php?categoryid=568"
 moodle_courses=(
     "https://moodle.uni.lu/course/view.php?id=3333" # Security 1
     "https://moodle.uni.lu/course/view.php?id=3332" # Information Management 1
@@ -34,7 +34,7 @@ google_sheets="https://docs.google.com/spreadsheets/u/0/"
 google_drive_bsp="https://docs.google.com/spreadsheets/d/11y0zILOsMJBMp3zOCdKH0y-IM8qJIyAglVGbygX9X2U/edit#gid=1449240152"
 
 BMT="https://messir.uni.lu/bmt/home"
-bsp_activity_report="https://docs.google.com/spreadsheets/d/11y0zILOsMJBMp3zOCdKH0y-IM8qJIyAglVGbygX9X2U/edit#gid=1449240152"
+bsp_activity_report="https://docs.google.com/spreadsheets/d/1tVj7fNuhFbiy165YyAZ7JQmUji0MuuC932kq9aDGjx0/edit#gid=1449240152"
 
 password_forget_reset="https://inscription.uni.lu/Inscriptions/Public/OubliMDP"
 password_troubleshooting="https://acme.uni.lu/TS"
