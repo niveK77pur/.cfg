@@ -41,3 +41,7 @@ alias config-s='config status'
 alias config-a='config add'
 alias config-c='config commit -m'
 alias config-p='config push'
+
+# get faster to the bics folders
+alias bics='cd /home/kuni/University/semester_3/BiCS/'
+alias bsp='cd /home/kuni/University/semester_3/BSP/'

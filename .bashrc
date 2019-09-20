@@ -224,7 +224,3 @@ export LIGHTAQUA=`echo -en "\e[106m"`           ###
 export WHITE=`echo -en "\e[107m"`               ###
 export DEFAULT=`echo -en "\e[49m"`              ###
 export reset=`echo -en "\e(B\e[m"` # \e[00m
-
-# Default Editor ---------------------------------------------------------------
-export VISUAL=vim
-export EDITOR=vim
