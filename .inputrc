@@ -1,14 +1,12 @@
 # check out the READLINE section in the bash manual for details on this file
 
+
+# Quick access -----------------------------------------------------------------
 control-o: "ranger-cd\C-m"
+control-f: 'rifle "$(fzf)"\C-j' 
 
-# "\C-gp":  "cd ~/University/semester_2/BSP/\r"
-# "\C-gbc": "cd ~/University/semester_2/BiCS/Computer_Infrastructures_1/\r"
-# "\C-gbl": "cd ~/University/semester_2/BiCS/Linear_Algebra_2/\r"
-# "\C-gbn": "cd ~/University/semester_2/BiCS/Networking_and_Communication/\r"
-# "\C-gbp": "cd ~/University/semester_2/BiCS/Programming_Fundamentals_2/\r"
-# "\C-gbt": "cd ~/University/semester_2/BiCS/Theoretical_Computer_Science_1/\r"
 
+# Git --------------------------------------------------------------------------
 "\C-gs": "git status\r"
 "\C-ga": "git add "
 "\C-gc": "\C-agit commit -m \"\C-e\"\r"

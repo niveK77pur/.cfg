@@ -10,10 +10,16 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                   Start-Up
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 # make screen more reddish at night
 exec redshift -l 49:6 -t 6000:2500
 
-exec gsettings set org.gnome.desktop.background picture-uri https://wallpapercave.com/wp/QqW1GL0.png
+# random wallpaper when starting i3
+exec feh --randomize --bg-fill ~/Pictures/i3wallpapers/
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                   Variables
@@ -212,7 +218,8 @@ mode "window-ops" { #{{{
     bindsym f floating toggle
 
     # take a screenshot
-    bindsym --release s exec --no-startup-id "import ~/Pictures/i3screenshot.jpg"; mode "default"
+    bindsym --release s      exec --no-startup-id "import              ~/Pictures/i3screenshot.jpg"; mode "default"
+    bindsym --release $mod+s exec --no-startup-id "import -window root ~/Pictures/i3screenshot.jpg"; mode "default"
 
     # back to normal
     bindsym Return  mode "default"
@@ -257,7 +264,7 @@ mode "system-ops" { #{{{
     # poweroff, reboot, suspend. hibernate machine
     bindsym control+p exec systemctl poweroff
     bindsym control+r exec systemctl reboot
-    bindsym control+s mode "default"; exec i3lock && systemctl suspend
+    bindsym control+s mode "default"; exec /opt/i3lockmore/i3lockmore --image-fill "/home/kuni/Pictures/i3wallpapers/lockscreen/End of Line - components/eol.png" && systemctl suspend
     bindsym control+h mode "default"; exec i3lock && systemctl hibernate
     bindsym control+F12 exec "i3-nagbar -t warning \
         -m 'Power off machine?' \
@@ -276,7 +283,7 @@ bindsym $mod+p mode "programs"
 mode "programs" { #{{{
     bindsym f exec firefox
     bindsym t exec thunderbird
-    bindsym d exec discrod 
+    bindsym d exec discord 
     bindsym z exec zathura 
     
     # back to normal

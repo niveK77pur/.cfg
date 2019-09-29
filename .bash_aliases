@@ -13,8 +13,8 @@
 alias playground-terminal='cd ~/Desktop/PLAYGROUND_TERMINAL/'
 
 # usb related
-alias usbstick="cd /media/"$USER"/BIEWESCH_K/"
-alias gvimportable='/media/kevin/BIEWESCH_K/gVimPortable7.4/gVimPortable.exe'
+alias usbstick="cd /media/$USER/BIEWESCH_K/"
+alias gvimportable="/media/$USER/BIEWESCH_K/gVimPortable7.4/gVimPortable.exe"
 
 #alias nvlc='nvlc --no-color'
 alias l1='ls -1'
@@ -45,3 +45,7 @@ alias config-p='config push'
 # get faster to the bics folders
 alias bics='cd /home/kuni/University/semester_3/BiCS/'
 alias bsp='cd /home/kuni/University/semester_3/BSP/'
+
+# swift aliases
+alias sb='swift build'
+alias sr='swift run'
