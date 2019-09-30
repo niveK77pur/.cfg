@@ -251,8 +251,8 @@ mode "system-ops" { #{{{
     bindsym $mod+8 exec --no-startup-id     amixer -qD pulse sset Master  80%
     bindsym $mod+9 exec --no-startup-id     amixer -qD pulse sset Master  90%
     bindsym $mod+0 exec --no-startup-id     amixer -qD pulse sset Master 100%
-    bindsym m      exec --no-startup-id     amixer -qD pulse sset Master mute
-    bindsym $mod+m exec --no-startup-id     amixer -qD pulse sset Master unmute
+    bindsym $mod+m exec --no-startup-id     amixer -qD pulse sset Master mute
+    bindsym m      exec --no-startup-id     amixer -qD pulse sset Master unmute
     bindsym t      exec --no-startup-id     amixer -qD pulse sset Master toggle
 
     # show system info

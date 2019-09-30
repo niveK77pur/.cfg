@@ -4,6 +4,8 @@
 
 set zoom-step 40
 set selection-clipboard clipboard
+set window-title-home-tilde true
+set statusbar-basename true
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                   Mappings
