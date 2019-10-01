@@ -49,3 +49,4 @@ alias bsp='cd /home/kuni/University/semester_3/BSP/'
 # swift aliases
 alias sb='swift build'
 alias sr='swift run'
+alias se='swift build && swift run'
