@@ -21,17 +21,17 @@ alias l1='ls -1'
 alias sl='sl -ae'
 
 # Windows applications
-alias cmd='/home/kevin/.wine/dosdevices/c:/windows/command/start.exe' 
-alias delphi6-windows='/home/kevin/.wine/dosdevices/c:/Program\ Files\ \(x86\)/Borland/Delphi6/Bin/delphi32.exe'
+# alias cmd='/home/kevin/.wine/dosdevices/c:/windows/command/start.exe' 
+# alias delphi6-windows='/home/kevin/.wine/dosdevices/c:/Program\ Files\ \(x86\)/Borland/Delphi6/Bin/delphi32.exe'
 
 # downloaded applications
 alias blender='/opt/blender-2.79-linux-glibc219-x86_64/blender'
 #alias blenderlink="/home/kevin/bin/StartBlenderViaConsole.sh"
 alias lyx='/usr/bin/lyx2.2'
-#alias atom='/home/kevin/atom/usr/bin/atom'
 
 # vim shortcut
 alias v='vim'
+alias n='nvim'
 
 alias vagrant='~/BSP/Semester_1/Vagrant_VM/missaleneous/Vagrant_download/vagrant'
 
