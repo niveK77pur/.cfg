@@ -16,4 +16,9 @@ map [normal] <BackSpace>     navigate previous
 map [fullscreen] <Space>     navigate next
 map [fullscreen] <BackSpace> navigate previous
 
+
+# Does not seem to work
+map [normal] <S-b> mark_add m
+map [normal] b     mark_evaluate m
+
 # vim: ft=config
