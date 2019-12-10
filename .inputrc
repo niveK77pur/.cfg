@@ -1,5 +1,6 @@
 # check out the READLINE section in the bash manual for details on this file
 
+"\C-x\C-e": edit-and-execute-command
 
 # Quick access -----------------------------------------------------------------
 control-o: "ranger-cd\C-m"

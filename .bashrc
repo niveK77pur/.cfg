@@ -69,6 +69,7 @@ if [ "$color_prompt" = yes ]; then
         PS1='\[\e[0;1;33m\]\u@\h\[\e[0m\]:\[\e[35m\]\w\[\e[36m\]\$\[\e[0m\] '
         #PS1='\[\e[0;1;33m\]\u@\h\[\e[0m\]×\[\e[35m\]\A\[\e[36m\]\$\[\e[0m\] '
         #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+        #PS1="\n${C1}\u@\h (${C2} \w ${C1})\$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ ${C1}• ${C2}\1/')${C1} • ${C2}\$(ls -1 | wc -l | sed 's: ::g') files${C1} • ${C2}\$(ls -lah | command grep -v / | command grep -m 1 total | sed 's/total //')\n${C1}====> \[\e[0m\]"
     fi
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -231,4 +232,22 @@ export reset=`echo -en "\e(B\e[m"` # \e[00m
 
 # Fuzzy finder -----------------------------------------------------------------
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+
+goconda() {
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/home/kuni/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/home/kuni/anaconda3/etc/profile.d/conda.sh" ]; then
+            . "/home/kuni/anaconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/kuni/anaconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
+}
 

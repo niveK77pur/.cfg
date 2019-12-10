@@ -11,6 +11,7 @@
 ####################
 
 alias playground-terminal='cd ~/Desktop/PLAYGROUND_TERMINAL/'
+alias nmr='sudo service network-manager restart'
 
 # usb related
 alias usbstick="cd /media/$USER/BIEWESCH_K/"
