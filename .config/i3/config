@@ -276,7 +276,7 @@ mode "system-ops" { #{{{
     # poweroff, reboot, suspend. hibernate machine
     bindsym control+p exec systemctl poweroff
     bindsym control+r exec systemctl reboot
-    bindsym control+s mode "default"; exec /opt/i3lockmore/i3lockmore --image-fill "/home/kuni/Pictures/i3wallpapers/lockscreen/End of Line - components/eol.png" && systemctl suspend
+    bindsym control+s mode "default"; exec /opt/i3lockmore/i3lockmore --image-fill "/home/kuni/Pictures/i3wallpapers/lockscreen/ludens-1576411224708-9031.jpg" && systemctl suspend
     bindsym control+h mode "default"; exec i3lock && systemctl hibernate
     bindsym control+F12 exec "i3-nagbar -t warning \
         -m 'Power off machine?' \

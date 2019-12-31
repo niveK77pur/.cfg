@@ -13,7 +13,7 @@
 alias playground-terminal='cd ~/Desktop/PLAYGROUND_TERMINAL/'
 alias nmr='sudo service network-manager restart'
 
-# usb related
+# usb related ------------------------------------------------------------------
 alias usbstick="cd /media/$USER/BIEWESCH_K/"
 alias gvimportable="/media/$USER/BIEWESCH_K/gVimPortable7.4/gVimPortable.exe"
 
@@ -21,33 +21,42 @@ alias gvimportable="/media/$USER/BIEWESCH_K/gVimPortable7.4/gVimPortable.exe"
 alias l1='ls -1'
 alias sl='sl -ae'
 
-# Windows applications
+# Windows applications ---------------------------------------------------------
 # alias cmd='/home/kevin/.wine/dosdevices/c:/windows/command/start.exe' 
 # alias delphi6-windows='/home/kevin/.wine/dosdevices/c:/Program\ Files\ \(x86\)/Borland/Delphi6/Bin/delphi32.exe'
 
-# downloaded applications
+# downloaded applications ------------------------------------------------------
 alias blender='/opt/blender-2.79-linux-glibc219-x86_64/blender'
 #alias blenderlink="/home/kevin/bin/StartBlenderViaConsole.sh"
 alias lyx='/usr/bin/lyx2.2'
 
-# vim shortcut
+# vim shortcut -----------------------------------------------------------------
 alias v='vim'
 alias n='nvim'
 
+# tmux shortcut ----------------------------------------------------------------
+alias t='tmux'
+alias tl='tmux ls'
+alias ta='tmux attach'
+alias tat='tmux attach -t'
+alias tn='tmux new -s'
+alias tk='tmux kill-session -t'
+# alias tr='~/.tmux/plugins/tmux-resurrect/scripts/restore.sh'
+
 alias vagrant='~/BSP/Semester_1/Vagrant_VM/missaleneous/Vagrant_download/vagrant'
 
-# git alias for dotfiles
+# git alias for dotfiles -------------------------------------------------------
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias config-s='config status'
 alias config-a='config add'
 alias config-c='config commit -m'
 alias config-p='config push'
 
-# get faster to the bics folders
+# get faster to the bics folders -----------------------------------------------
 alias bics='cd /home/kuni/University/semester_3/BiCS/'
 alias bsp='cd /home/kuni/University/semester_3/BSP/'
 
-# swift aliases
+# swift aliases ----------------------------------------------------------------
 alias sb='swift build'
 alias sr='swift run'
 alias se='swift build && swift run'
