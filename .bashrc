@@ -233,8 +233,10 @@ export reset=`echo -en "\e(B\e[m"` # \e[00m
 
 # Fuzzy finder -----------------------------------------------------------------
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# export FZF_DEFAULT_COMMAND="find"
+# export FZF_DEFAULT_COMMAND='rg --hidden -l ""'
 
-
+# Homework on machine learning -------------------------------------------------
 goconda() {
     # >>> conda initialize >>>
     # !! Contents within this block are managed by 'conda init' !!

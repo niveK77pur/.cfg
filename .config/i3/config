@@ -22,6 +22,26 @@ exec redshift -l 49:6 -t 6000:2500
 exec feh --randomize --bg-fill ~/Pictures/i3wallpapers/
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                         Commands for specific windows
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# {{{
+#
+# Use the following to figure out the criterias
+# 
+#   1) xprop | grep WM_CLASS                returns: (instance, class)
+#   2) xprop | grep WM_WINDOW_ROLE          returns: window_role
+#   3) xprop | grep _NET_WM_WINDOW_TYPE     returns: window_type (only take last part)
+#   4) xprop | grep _NET_WM_NAME            returns: title
+#   5) xprop | grep WM_NAME                 returns: title (as fallback for the above)
+
+# Make flowblade's render window float
+for_window [class="Flowbladesinglerender"] floating enable
+
+# Make 'cool-retro-term' settings window float
+for_window [class="Cool-Retro-Term-1.1.1-x86_64.AppImage" title="Settings"] floating enable
+    
+# }}}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                   Variables
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # {{{
@@ -140,6 +160,15 @@ bindsym $mod+Shift+Down     move down
 bindsym $mod+Shift+Up       move up
 bindsym $mod+Shift+Right    move right
 
+# Pressing left will shrink the window’s width.
+# Pressing right will grow the window’s width.
+# Pressing up will shrink the window’s height.
+# Pressing down will grow the window’s height.
+bindsym $mod+control+$left   resize shrink width     50 px or 1 ppt
+bindsym $mod+control+$down   resize grow height      50 px or 1 ppt
+bindsym $mod+control+$up     resize shrink height    50 px or 1 ppt
+bindsym $mod+control+$right  resize grow width       50 px or 1 ppt
+
 # split in horizontal orientation
 bindsym $mod+c split h
 # split in vertical orientation
@@ -230,8 +259,8 @@ mode "window-ops" { #{{{
     bindsym f floating toggle
 
     # take a screenshot
-    bindsym --release s      exec --no-startup-id "import              ~/Pictures/i3screenshot.jpg"; mode "default"
-    bindsym --release $mod+s exec --no-startup-id "import -window root ~/Pictures/i3screenshot.jpg"; mode "default"
+    bindsym --release s      exec --no-startup-id "import              ~/Pictures/VinLudensScreenshot.jpg"; mode "default"
+    bindsym --release $mod+s exec --no-startup-id "import -window root ~/Pictures/VinLudensScreenshot.jpg"; mode "default"
 
     # back to normal
     bindsym Return  mode "default"

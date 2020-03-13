@@ -43,6 +43,9 @@ alias tn='tmux new -s'
 alias tk='tmux kill-session -t'
 # alias tr='~/.tmux/plugins/tmux-resurrect/scripts/restore.sh'
 
+# herbstclient -----------------------------------------------------------------
+alias hc="herbstclient"
+
 alias vagrant='~/BSP/Semester_1/Vagrant_VM/missaleneous/Vagrant_download/vagrant'
 
 # git alias for dotfiles -------------------------------------------------------
@@ -60,3 +63,9 @@ alias bsp='cd /home/kuni/University/semester_3/BSP/'
 alias sb='swift build'
 alias sr='swift run'
 alias se='swift build && swift run'
+
+# get faster to erasmus stuff --------------------------------------------------
+alias tu='cd /home/kuni/University/semester_4/TU-WIEN'
+alias ew='cd /home/kuni/University/semester_4/Erasmus/wohnung'
+alias em='cd /home/kuni/University/semester_4/Erasmus/Miscellaneous'
+alias el='cd /home/kuni/University/semester_4/Erasmus/Learning_Agreement'

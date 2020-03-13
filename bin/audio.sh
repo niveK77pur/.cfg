@@ -22,8 +22,13 @@ case $1 in
     # Start fluidsynth
     fluidsynth --server --no-shell --audio-driver=jack \
         --connect-jack-outputs --reverb=0 --chorus=0 --gain=0.8 \
-        /usr/share/sounds/sf2/FluidR3_GM.sf2 \
+        /usr/share/sounds/sf2/YDP-GrandPiano-20160804.sf2 \
         &>/tmp/fluidsynth.out &
+    
+        # /usr/share/sounds/sf2/FluidR3_GM.sf2 \
+        # /usr/share/sounds/sf2/TimGM6mb.sf2 \
+        # /usr/share/sounds/sf2/UprightPianoKW-20190703.sf2 \
+        # /usr/share/sounds/sf2/YDP-GrandPiano-20160804.sf2 \
 
     sleep 1
 

@@ -1,10 +1,110 @@
 #!/bin/bash
-# vim: nowrap:ts=4:tw=0
+# vim: nowrap ts=4 tw=0 fdm=marker
 
 browser="firefox"
 args="--new-window"
 
-# links:
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                   Functions
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# {{{
+goto() {
+    "$browser" "$args" "$1" &
+}
+
+message(){
+    # $1 : command
+    # $2 : help message
+    [[ ${#1} -eq 1 ]] && type='c' || type='s'
+    printf "   -$PREDICATE%$type\t%s\n" "$1" "$2"
+}
+# }}}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                    TU Wien
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# {{{
+# Links ------------------------------------------------------------------------
+
+# tiss="https://tiss.tuwien.ac.at/education/favorites.xhtml?dswid=3646&dsrid=73"    # Favoriten
+tiss="https://tiss.tuwien.ac.at/events/personSchedule.xhtml?dswid=5620&dsrid=210"   # Kalender
+
+tuwel_courses=(
+    "https://tuwel.tuwien.ac.at/course/view.php?id=21304"               # Introduction to Visual Computing
+    "https://tuwel.tuwien.ac.at/course/view.php?id=21568"               # Einführung zu Künstliche Intelligenz
+    "https://tuwel.tuwien.ac.at/course/view.php?idnumber=188410-2020S"  # Software Engineering und Projektmanagement (VO)
+    "https://tuwel.tuwien.ac.at/course/view.php?id=153"                 # Software Engineering und Projektmanagement (PR)
+    "http://www.complang.tuwien.ac.at/andi/185A48"                      # Übersetzerbau
+    "http://www.complang.tuwien.ac.at/ubvl/"                            # Übersetzerbau (Übung)
+    "https://tuwel.tuwien.ac.at/course/view.php?id=22147"               # Introduction to security (VU)
+    "https://tuwel.tuwien.ac.at/course/view.php?id=21976"               # Introduction to security (UE)
+)
+
+oead="https://housing.oead.at/de/login"
+
+reset="https://reset.inso.tuwien.ac.at/#/course/701/view"
+
+# Help -------------------------------------------------------------------------
+
+helpMessage() {
+    message 'i'  "TISS; everything course related"
+    message 'uh' "TUWEL; Get more options."
+    message 'o'  "OeAD; website of the housing"
+    message 's'  "ssh into the Übersetzerbau machine"
+    message 'r'  "RESET; for Project Management"
+    message 't'  "Use this option to open the link in a new tab."
+    message 'h'  "Print this help screen and exit."
+}
+
+tuwelHelpMessage() {
+    PREDICATE=u
+    message 'v'  "Introduction to Visual Computing"
+    message 'a'  "Introduction to Artificial Intelligence"
+    message 'p'  "Software Engineering und Projektmanagement (VO)"
+    message 'P'  "Software Engineering und Projektmanagement (PR)"
+    message 'c'  "Übersetzerbau (Compilers)"
+    message 'C'  "Übersetzerbau (Compilers) Übungsteil"
+    message 's'  "Introduction to security (VU)"
+    message 'S'  "Introduction to security (UE)"
+    message 'h'  "Print this help screen and exit."
+}
+
+# Main -------------------------------------------------------------------------
+if [ $# -eq 0 ]
+then
+    echo "Use -h to get help about the options."
+else
+    while getopts hiu:srot opt
+    do
+        case "$opt" in
+            i) goto "$tiss" ;;
+            u) 
+                case "$OPTARG" in
+                    v) goto "${tuwel_courses[0]}";;
+                    a) goto "${tuwel_courses[1]}";;
+                    p) goto "${tuwel_courses[2]}";;
+                    P) goto "${tuwel_courses[3]}";;
+                    c) goto "${tuwel_courses[4]}";;
+                    C) goto "${tuwel_courses[5]}";;
+                    s) goto "${tuwel_courses[6]}";;
+                    S) goto "${tuwel_courses[7]}";;
+                    h) tuwelHelpMessage ;;
+                esac
+                ;;
+            s) ssh u11944047@g0.complang.tuwien.ac.at ;;
+            r) goto "$reset" ;;
+            o) goto "$oead" ;;
+            t) args='--new-tab' ;;
+            h) helpMessage ;;
+        esac
+    done
+fi
+# }}}
+exit 0
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                     UniLu
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# {{{
+# Links ------------------------------------------------------------------------
 intranet="https://intrastudent.uni.lu"
 re_enrolment="https://wwwen.uni.lu/students/useful_information_from_a_to_z"
 # owa="https://owa.uni.lu"
@@ -39,17 +139,7 @@ bsp_activity_report="https://docs.google.com/spreadsheets/d/1tVj7fNuhFbiy165YyAZ
 password_forget_reset="https://inscription.uni.lu/Inscriptions/Public/OubliMDP"
 password_troubleshooting="https://acme.uni.lu/TS"
 
-goto() {
-    "$browser" "$args" "$1" &
-}
-
-message(){
-    # $1 : command
-    # $2 : help message
-    [[ ${#1} -eq 1 ]] && type='c' || type='s'
-    printf "   -$PREDICATE%$type\t%s\n" "$1" "$2"
-}
-
+# Help -------------------------------------------------------------------------
 helpMessage() {
     echo   "   $(basename $0) [-t] links ..."
     message 'bh' "Get more options for BSP."
@@ -118,7 +208,7 @@ BSPHelpMessage(){
     message 'h' "Print this help screen and exit."
 }
 
-
+# Main -------------------------------------------------------------------------
 if [ $# -eq 0 ]
 then
     echo "Use -h to get help about the options."
@@ -194,3 +284,5 @@ else
         esac
     done
 fi
+
+# }}}
