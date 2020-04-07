@@ -21,6 +21,9 @@ exec redshift -l 49:6 -t 6000:2500
 # random wallpaper when starting i3
 exec feh --randomize --bg-fill ~/Pictures/i3wallpapers/
 
+# start compositor for transparent terminal background
+exec --no-startup-id picom
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                         Commands for specific windows
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -83,10 +86,6 @@ workspace 5 output HDMI1
 # Automatic back-and-forth when switching to the current workspace
 workspace_auto_back_and_forth yes
 
-# Changing colors
-client.focused #4c7899 #285577 #ffffff #ffffff   #285577
-
-
 # Marks ------------------------------------------------------------------------
 show_marks yes
 # read 1 character and mark the current window with this character
@@ -115,6 +114,23 @@ font pango:monospace 8
 # Floating windows -------------------------------------------------------------
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
+
+# }}}
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                  Appearance
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# {{{
+
+# Gaps -------------------------------------------------------------------------
+gaps inner 20
+
+# Window borders ---------------------------------------------------------------
+default_border pixel 2
+
+# Colors -----------------------------------------------------------------------
+# class         border   backgr.  text     indicator  child_border
+client.focused  #e68a00  #e68a00  #ffffff  #ff0000    #e68a00
+
 
 
 # }}}
@@ -259,8 +275,8 @@ mode "window-ops" { #{{{
     bindsym f floating toggle
 
     # take a screenshot
-    bindsym --release s      exec --no-startup-id "import              ~/Pictures/VinLudensScreenshot.jpg"; mode "default"
-    bindsym --release $mod+s exec --no-startup-id "import -window root ~/Pictures/VinLudensScreenshot.jpg"; mode "default"
+    bindsym --release s      exec --no-startup-id "import              ~/Pictures/VinLudensScreenshot.png"; mode "default"
+    bindsym --release $mod+s exec --no-startup-id "import -window root ~/Pictures/VinLudensScreenshot.png"; mode "default"
 
     # back to normal
     bindsym Return  mode "default"
@@ -305,7 +321,8 @@ mode "system-ops" { #{{{
     # poweroff, reboot, suspend. hibernate machine
     bindsym control+p exec systemctl poweroff
     bindsym control+r exec systemctl reboot
-    bindsym control+s mode "default"; exec /opt/i3lockmore/i3lockmore --image-fill "/home/kuni/Pictures/i3wallpapers/lockscreen/ludens-1576411224708-9031.jpg" && systemctl suspend
+    # bindsym control+s mode "default"; exec /opt/i3lockmore/i3lockmore --image-fill "/home/kuni/Pictures/i3wallpapers/lockscreen/ludens-1576411224708-9031.jpg" && systemctl suspend
+    bindsym control+s mode "default"; exec i3lock && systemctl suspend
     bindsym control+h mode "default"; exec i3lock && systemctl hibernate
     bindsym control+F12 exec "i3-nagbar -t warning \
         -m 'Power off machine?' \
@@ -341,7 +358,7 @@ mode "programs" { #{{{
 # finds out, if available)
 bar {
 # Display mode -----------------------------------------------------------------
-    mode dock
+    mode hide
     # modifier $mod
 
     position bottom
