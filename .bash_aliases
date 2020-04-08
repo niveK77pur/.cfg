@@ -65,7 +65,16 @@ alias sr='swift run'
 alias se='swift build && swift run'
 
 # get faster to erasmus stuff --------------------------------------------------
-alias tu='cd /home/kuni/University/semester_4/TU-WIEN'
 alias ew='cd /home/kuni/University/semester_4/Erasmus/wohnung'
 alias em='cd /home/kuni/University/semester_4/Erasmus/Miscellaneous'
 alias el='cd /home/kuni/University/semester_4/Erasmus/Learning_Agreement'
+
+# TU Wien directories ---------------------------------------------------------
+alias tu='cd /home/kuni/University/semester_4/TU-WIEN'
+alias tua='cd /home/kuni/University/semester_4/TU-WIEN/Articial_Intelligence'
+alias tuv='cd /home/kuni/University/semester_4/TU-WIEN/Visual_Computing'
+alias tuc='cd /home/kuni/University/semester_4/TU-WIEN/Compilers'
+alias tup='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-VO'
+alias tuP='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR'
+alias tus='cd /home/kuni/University/semester_4/TU-WIEN/Security-VU'
+alias tuS='cd /home/kuni/University/semester_4/TU-WIEN/Security-UE'

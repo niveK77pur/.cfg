@@ -22,7 +22,7 @@ exec redshift -l 49:6 -t 6000:2500
 exec feh --randomize --bg-fill ~/Pictures/i3wallpapers/
 
 # start compositor for transparent terminal background
-exec --no-startup-id picom
+exec picom
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                         Commands for specific windows
@@ -129,9 +129,7 @@ default_border pixel 2
 
 # Colors -----------------------------------------------------------------------
 # class         border   backgr.  text     indicator  child_border
-client.focused  #e68a00  #e68a00  #ffffff  #ff0000    #e68a00
-
-
+client.focused  #e68a00  #e68a00  #ffffff  #ffbe8c    #e68a00
 
 # }}}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -181,8 +179,8 @@ bindsym $mod+Shift+Right    move right
 # Pressing up will shrink the window’s height.
 # Pressing down will grow the window’s height.
 bindsym $mod+control+$left   resize shrink width     50 px or 1 ppt
-bindsym $mod+control+$down   resize grow height      50 px or 1 ppt
-bindsym $mod+control+$up     resize shrink height    50 px or 1 ppt
+bindsym $mod+control+$down   resize shrink height    50 px or 1 ppt
+bindsym $mod+control+$up     resize grow height      50 px or 1 ppt
 bindsym $mod+control+$right  resize grow width       50 px or 1 ppt
 
 # split in horizontal orientation
@@ -261,8 +259,8 @@ mode "window-ops" { #{{{
     # Pressing up will shrink the window’s height.
     # Pressing down will grow the window’s height.
     bindsym $left   resize shrink width     50 px or 1 ppt
-    bindsym $down   resize grow height      50 px or 1 ppt
-    bindsym $up     resize shrink height    50 px or 1 ppt
+    bindsym $up     resize grow height      50 px or 1 ppt
+    bindsym $down   resize shrink height    50 px or 1 ppt
     bindsym $right  resize grow width       50 px or 1 ppt
 
     # Move the window

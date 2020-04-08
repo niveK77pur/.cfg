@@ -38,6 +38,7 @@ battery all {
         status_full = " FULL"
         low_threshold = 30
         threshold_type = "time"
+        # last_full_capacity = true
         format = "%status %percentage (%remaining)"
 }
 
