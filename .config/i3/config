@@ -42,6 +42,9 @@ for_window [class="Flowbladesinglerender"] floating enable
 
 # Make 'cool-retro-term' settings window float
 for_window [class="Cool-Retro-Term-1.1.1-x86_64.AppImage" title="Settings"] floating enable
+
+# Make Matlab preferences window float
+for_window [class="MATLAB R2019b - academic use" title="Preferences"] floating enable
     
 # }}}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
