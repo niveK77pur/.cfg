@@ -254,3 +254,8 @@ goconda() {
     # <<< conda initialize <<<
 }
 
+# pywal ------------------------------------------------------------------------
+if xset q &>/dev/null;
+then
+    (cat ~/.cache/wal/sequences &)
+fi
