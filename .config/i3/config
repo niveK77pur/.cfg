@@ -18,25 +18,32 @@
 # make screen more reddish at night
 exec redshift -l 49:6 -t 6000:2500
 
-# random wallpaper when starting i3
-exec feh --randomize --bg-fill ~/Pictures/i3wallpapers/
+# random wallpaper when starting i3 and start compositor for transparent
+# terminal background
+exec_always \
+    pkill picom;\
+    wal -qi ~/Pictures/i3wallpapers/active --saturate 0.5;\
+    picom
 
-# start compositor for transparent terminal background
-exec picom
+# random wallpaper when starting i3
+# exec feh --randomize --bg-fill ~/Pictures/i3wallpapers/active/
+
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                         Commands for specific windows
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # {{{
 #
-# Use the following to figure out the criterias
+# Use the following to figure out the criterias {{{
 # 
 #   1) xprop | grep WM_CLASS                returns: (instance, class)
 #   2) xprop | grep WM_WINDOW_ROLE          returns: window_role
 #   3) xprop | grep _NET_WM_WINDOW_TYPE     returns: window_type (only take last part)
 #   4) xprop | grep _NET_WM_NAME            returns: title
 #   5) xprop | grep WM_NAME                 returns: title (as fallback for the above)
+# }}}
 
+# Floating windows -------------------------------------------------------------
 # Make flowblade's render window float
 for_window [class="Flowbladesinglerender"] floating enable
 
@@ -45,7 +52,10 @@ for_window [class="Cool-Retro-Term-1.1.1-x86_64.AppImage" title="Settings"] floa
 
 # Make Matlab preferences window float
 for_window [class="MATLAB R2019b - academic use" title="Preferences"] floating enable
-    
+
+# Marking windows -------------------------------------------------------------- 
+for_window [class="discord"] mark d
+
 # }}}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                   Variables
@@ -145,6 +155,10 @@ bindsym $mod+Return exec i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
+
+# the scratchpad
+bindsym $mod+shift+s scratchpad show
+bindsym $mod+ctrl+s move scratchpad
 
 # start dmenu (a program launcher)
 bindsym $mod+d       exec dmenu_run
@@ -371,4 +385,9 @@ bar {
     binding_mode_indicator yes
 
     status_command i3status
+    i3bar_command i3bar --transparency
+
+    colors {
+        background #000000AB
+    }
 }
