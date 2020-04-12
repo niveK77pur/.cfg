@@ -44,6 +44,9 @@ exec_always \
 # }}}
 
 # Floating windows -------------------------------------------------------------
+# Open a floating terminal
+for_window [instance="floating_terminal"] floating enable
+
 # Make flowblade's render window float
 for_window [class="Flowbladesinglerender"] floating enable
 
@@ -152,6 +155,7 @@ client.focused  #e68a00  #e68a00  #ffffff  #ffbe8c    #e68a00
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Shift+Return exec alacritty --class 'floating_terminal'
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -337,7 +341,7 @@ mode "system-ops" { #{{{
     bindsym control+p exec systemctl poweroff
     bindsym control+r exec systemctl reboot
     # bindsym control+s mode "default"; exec /opt/i3lockmore/i3lockmore --image-fill "/home/kuni/Pictures/i3wallpapers/lockscreen/ludens-1576411224708-9031.jpg" && systemctl suspend
-    bindsym control+s mode "default"; exec i3lock && systemctl suspend
+    bindsym control+s mode "default"; exec i3lock -c $(head -n1 ~/.cache/wal/colors) && systemctl suspend
     bindsym control+h mode "default"; exec i3lock && systemctl hibernate
     bindsym control+F12 exec "i3-nagbar -t warning \
         -m 'Power off machine?' \
