@@ -22,7 +22,9 @@ exec redshift -l 49:6 -t 6000:2500
 # terminal background
 exec_always \
     pkill picom;\
-    wal -qi ~/Pictures/i3wallpapers/active --saturate 0.5;\
+    wal -qi ~/Pictures/i3wallpapers/active \
+        --backend haishoku \
+        --saturate 0.5;\
     picom
 
 # random wallpaper when starting i3
@@ -50,7 +52,10 @@ for_window [instance="floating_terminal"] floating enable
 # Make flowblade's render window float
 for_window [class="Flowbladesinglerender"] floating enable
 
-# Make 'cool-retro-term' settings window float
+# Thunderbird
+for_window [class="Thunderbird" window_role="messageWindow"] floating enable
+
+# cool-retro-term
 for_window [class="Cool-Retro-Term-1.1.1-x86_64.AppImage" title="Settings"] floating enable
 
 # Make Matlab windows float
