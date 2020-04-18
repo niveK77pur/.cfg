@@ -53,6 +53,7 @@ alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias config-s='config status'
 alias config-a='config add'
 alias config-c='config commit -m'
+alias config-C='config commit -a -m'
 alias config-p='config push'
 
 # get faster to the bics folders -----------------------------------------------

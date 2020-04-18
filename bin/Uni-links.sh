@@ -42,6 +42,7 @@ tuwel_courses=(
 oead="https://housing.oead.at/de/login"
 
 reset="https://reset.inso.tuwien.ac.at/#/course/701/view"
+hackthespace="https://hackthe.space/"
 
 # Help -------------------------------------------------------------------------
 
@@ -90,7 +91,7 @@ else
                     h) tuwelHelpMessage ;;
                 esac
                 ;;
-            s) ssh u11944047@g0.complang.tuwien.ac.at ;;
+            s) goto "$hackthespace" ;;
             r) goto "$reset" ;;
             o) goto "$oead" ;;
             t) args='--new-tab' ;;

@@ -140,7 +140,12 @@ thunderbird-compose () {
 }
 
 
-# Ranger -----------------------------------------------------------------------
+# File Managers ----------------------------------------------------------------
+LFCD="$HOME/.config/lf/lfcd.sh"
+if [ -f "$LFCD" ]; then
+    source "$LFCD"
+fi
+
 ranger-cd() {
     tempfile="$(mktemp)"
     /usr/bin/ranger --choosedir="$tempfile" "${@:-$(pwd)}"
@@ -259,3 +264,5 @@ if xset q &>/dev/null;
 then
     (cat ~/.cache/wal/sequences &)
 fi
+
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash

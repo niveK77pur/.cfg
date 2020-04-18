@@ -46,8 +46,9 @@ exec_always \
 # }}}
 
 # Floating windows -------------------------------------------------------------
-# Open a floating terminal
+# Open a floating window
 for_window [instance="floating_terminal"] floating enable
+for_window [class="floating_window"] floating enable
 
 # Make flowblade's render window float
 for_window [class="Flowbladesinglerender"] floating enable
@@ -161,7 +162,7 @@ client.focused  #e68a00  #e68a00  #ffffff  #ffbe8c    #e68a00
 
 # start a terminal
 bindsym $mod+Return exec i3-sensible-terminal
-bindsym $mod+Shift+Return exec alacritty --class 'floating_terminal'
+bindsym $mod+Shift+Return exec i3-sensible-terminal --class 'floating_terminal'
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -300,8 +301,8 @@ mode "window-ops" { #{{{
     bindsym f floating toggle
 
     # take a screenshot
-    bindsym --release s      exec --no-startup-id "import              ~/Pictures/VinLudensScreenshot.png"; mode "default"
-    bindsym --release $mod+s exec --no-startup-id "import -window root ~/Pictures/VinLudensScreenshot.png"; mode "default"
+    bindsym --release s       mode "default"; exec --no-startup-id "import              ~/Pictures/VinLudensScreenshot.png"
+    bindsym --release Shift+s mode "default"; exec --no-startup-id "import -window root ~/Pictures/VinLudensScreenshot.png"
 
     # back to normal
     bindsym Return  mode "default"

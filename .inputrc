@@ -3,7 +3,7 @@
 "\C-x\C-e": edit-and-execute-command
 
 # Quick access -----------------------------------------------------------------
-control-o: "ranger-cd\C-m"
+control-o: "lfcd\C-m"
 control-f: 'rifle "$(fzf)"\C-j' 
 
 
