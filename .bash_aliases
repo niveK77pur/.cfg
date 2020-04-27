@@ -79,3 +79,6 @@ alias tup='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-VO'
 alias tuP='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR'
 alias tus='cd /home/kuni/University/semester_4/TU-WIEN/Security-VU'
 alias tuS='cd /home/kuni/University/semester_4/TU-WIEN/Security-UE'
+
+# vpn for testbed security server
+alias svpn='sudo openvpn ~/University/semester_4/TU-WIEN/Security-UE/wutctf.ovpn'

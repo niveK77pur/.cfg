@@ -55,6 +55,7 @@ for_window [class="Flowbladesinglerender"] floating enable
 
 # Thunderbird
 for_window [class="Thunderbird" window_role="messageWindow"] floating enable
+for_window [class="Thunderbird" window_role="Msgcompose"] floating enable
 
 # cool-retro-term
 for_window [class="Cool-Retro-Term-1.1.1-x86_64.AppImage" title="Settings"] floating enable

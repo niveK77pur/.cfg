@@ -39,10 +39,19 @@ map O $mimeopen --ask $f
 # use either file extensions and/or mime types here. Below uses an editor for
 # text files and a file opener for the rest.
 cmd open ${{
-    case $(file --mime-type $f -b) in
-        text/*) $EDITOR $fx;;
-        application/pdf) zathura $fx &;;
-        *) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
+    # based on file extension (string after last '.')
+    case ${f##*.} in
+        ytlink|ylink)   firefox "$(< $f)"; exit;;
+        tlink)          firefox "$(< $f)"; exit;;
+        vlink)          vlc --quiet "$(< $f)" &> /dev/null & exit;;
+        md)             typora $f & exit;;
+    esac
+
+    # based on mime type
+    case $(file -Lb --mime-type $f) in
+        text/*)             $EDITOR $fx;;
+        application/pdf)    zathura $fx &;;
+        *)                  for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
 

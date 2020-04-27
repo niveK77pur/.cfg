@@ -39,6 +39,11 @@ tuwel_courses=(
     "https://tuwel.tuwien.ac.at/course/view.php?id=21976"               # Introduction to security (UE)
 )
 
+mattermost=(
+    "https://mattermost.fsinf.at/w-inf-tuwien/channels/uebersetzerbau"              # Übersetzerbau
+    "https://mattermost.secpriv.tuwien.ac.at/introsec-ss20/channels/town-square"    # Introduction to security
+)
+
 oead="https://housing.oead.at/de/login"
 
 reset="https://reset.inso.tuwien.ac.at/#/course/701/view"
@@ -49,10 +54,18 @@ hackthespace="https://hackthe.space/"
 helpMessage() {
     message 'i'  "TISS; everything course related"
     message 'uh' "TUWEL; Get more options."
+    message 'mh' "Mattermost; Get more options."
     message 'o'  "OeAD; website of the housing"
     message 's'  "ssh into the Übersetzerbau machine"
     message 'r'  "RESET; for Project Management"
     message 't'  "Use this option to open the link in a new tab."
+    message 'h'  "Print this help screen and exit."
+}
+
+mattermostHelpMessage() {
+    PREDICATE=m
+    message 'c'  "Übersetzerbau (Compilers)"
+    message 'S'  "Introduction to security"
     message 'h'  "Print this help screen and exit."
 }
 
@@ -74,7 +87,7 @@ if [ $# -eq 0 ]
 then
     echo "Use -h to get help about the options."
 else
-    while getopts hiu:srot opt
+    while getopts hiu:m:srot opt
     do
         case "$opt" in
             i) goto "$tiss" ;;
@@ -89,6 +102,13 @@ else
                     s) goto "${tuwel_courses[6]}";;
                     S) goto "${tuwel_courses[7]}";;
                     h) tuwelHelpMessage ;;
+                esac
+                ;;
+            m)
+                case "$OPTARG" in
+                    c) goto "${mattermost[0]}";;
+                    s) goto "${mattermost[1]}";;
+                    h) mattermostHelpMessage ;;
                 esac
                 ;;
             s) goto "$hackthespace" ;;
