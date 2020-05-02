@@ -18,14 +18,21 @@
 # make screen more reddish at night
 exec redshift -l 49:6 -t 6000:2500
 
+# start network manager
+exec --no-startup-id nm-applet
+
 # random wallpaper when starting i3 and start compositor for transparent
 # terminal background
-exec_always \
-    pkill picom;\
-    wal -qi ~/Pictures/i3wallpapers/active \
+exec wal -qi ~/Pictures/i3wallpapers/active \
         --backend haishoku \
         --saturate 0.5;\
-    picom
+exec picom
+# exec_always \
+#     pkill picom;\
+#     wal -qi ~/Pictures/i3wallpapers/active \
+#         --backend haishoku \
+#         --saturate 0.5;\
+#     picom
 
 # random wallpaper when starting i3
 # exec feh --randomize --bg-fill ~/Pictures/i3wallpapers/active/
@@ -271,6 +278,15 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning \
         This will end your X session.' \
     -B 'Yes, exit i3' 'i3-msg exit' \
     "
+
+# reload a new background
+bindsym $mod+Mod1+r exec \
+        wal -qi ~/Pictures/i3wallpapers/active \
+                --backend haishoku \
+                --saturate 0.5;
+                
+# edit config files
+bindsym $mod+ctrl+c exec edit_configs.sh
 
 # }}}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

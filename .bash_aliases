@@ -60,10 +60,10 @@ alias config-p='config push'
 alias bics='cd /home/kuni/University/semester_3/BiCS/'
 alias bsp='cd /home/kuni/University/semester_3/BSP/'
 
-# swift aliases ----------------------------------------------------------------
-alias sb='swift build'
-alias sr='swift run'
-alias se='swift build && swift run'
+# # swift aliases ----------------------------------------------------------------
+# alias sb='swift build'
+# alias sr='swift run'
+# alias se='swift build && swift run'
 
 # get faster to erasmus stuff --------------------------------------------------
 alias ew='cd /home/kuni/University/semester_4/Erasmus/wohnung'
@@ -76,9 +76,12 @@ alias tua='cd /home/kuni/University/semester_4/TU-WIEN/Articial_Intelligence'
 alias tuv='cd /home/kuni/University/semester_4/TU-WIEN/Visual_Computing'
 alias tuc='cd /home/kuni/University/semester_4/TU-WIEN/Compilers'
 alias tup='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-VO'
-alias tuP='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR'
+alias tuP='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project'
 alias tus='cd /home/kuni/University/semester_4/TU-WIEN/Security-VU'
 alias tuS='cd /home/kuni/University/semester_4/TU-WIEN/Security-UE'
 
-# vpn for testbed security server
+alias sf='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project/ss20_sepm_qse_14/frontend/'
+alias sb='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project/ss20_sepm_qse_14/backend/'
+
+# vpn for testbed security server ----------------------------------------------
 alias svpn='sudo openvpn ~/University/semester_4/TU-WIEN/Security-UE/wutctf.ovpn'

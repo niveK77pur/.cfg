@@ -1,0 +1,13 @@
+#!/bin/bash
+
+directories=(
+    alacritty/
+    i3/
+    lf/
+)
+
+
+cd $HOME/.config
+config_file="$(find ${directories[@]} -type f | dmenu -i -l 10 -p "config files: ")"
+
+i3-sensible-terminal --command nvim "$PWD/$config_file" &

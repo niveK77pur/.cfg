@@ -44,6 +44,7 @@ cmd open ${{
         ytlink|ylink)   firefox "$(< $f)"; exit;;
         tlink)          firefox "$(< $f)"; exit;;
         vlink)          vlc --quiet "$(< $f)" &> /dev/null & exit;;
+        link)           firefox "$(< $f)"; exit;;
         md)             typora $f & exit;;
     esac
 
@@ -51,6 +52,7 @@ cmd open ${{
     case $(file -Lb --mime-type $f) in
         text/*)             $EDITOR $fx;;
         application/pdf)    zathura $fx &;;
+        image/svg*)         inkscape $f &;;
         *)                  for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
