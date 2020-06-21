@@ -25,8 +25,8 @@ message(){
 # {{{
 # Links ------------------------------------------------------------------------
 
-# tiss="https://tiss.tuwien.ac.at/education/favorites.xhtml?dswid=3646&dsrid=73"    # Favoriten
-tiss="https://tiss.tuwien.ac.at/events/personSchedule.xhtml?dswid=5620&dsrid=210"   # Kalender
+tiss="https://tiss.tuwien.ac.at/education/favorites.xhtml?dswid=3646&dsrid=73"    # Favoriten
+# tiss="https://tiss.tuwien.ac.at/events/personSchedule.xhtml?dswid=5620&dsrid=210"   # Kalender
 
 tuwel_courses=(
     "https://tuwel.tuwien.ac.at/course/view.php?id=21304"               # Introduction to Visual Computing

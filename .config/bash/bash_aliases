@@ -1,4 +1,5 @@
-## ~.bash_aliases
+# vim: filetype=sh
+## ~/.bash_aliases
 ## Used for added alias definitions
 # Alias definitions.
 # You may want to put all your additions into a separate file like
@@ -17,6 +18,9 @@ alias nmr='sudo service network-manager restart'
 alias usbstick="cd /media/$USER/BIEWESCH_K/"
 alias gvimportable="/media/$USER/BIEWESCH_K/gVimPortable7.4/gVimPortable.exe"
 
+# mount related ----------------------------------------------------------------
+alias go-mtp="cd /run/user/$UID/gvfs"
+
 #alias nvlc='nvlc --no-color'
 alias l1='ls -1'
 alias sl='sl -ae'
@@ -24,11 +28,6 @@ alias sl='sl -ae'
 # Windows applications ---------------------------------------------------------
 # alias cmd='/home/kevin/.wine/dosdevices/c:/windows/command/start.exe' 
 # alias delphi6-windows='/home/kevin/.wine/dosdevices/c:/Program\ Files\ \(x86\)/Borland/Delphi6/Bin/delphi32.exe'
-
-# downloaded applications ------------------------------------------------------
-alias blender='/opt/blender-2.79-linux-glibc219-x86_64/blender'
-#alias blenderlink="/home/kevin/bin/StartBlenderViaConsole.sh"
-alias lyx='/usr/bin/lyx2.2'
 
 # vim shortcut -----------------------------------------------------------------
 alias v='vim'
@@ -48,6 +47,9 @@ alias hc="herbstclient"
 
 alias vagrant='~/BSP/Semester_1/Vagrant_VM/missaleneous/Vagrant_download/vagrant'
 
+# LazyGit ----------------------------------------------------------------------
+alias lg='lazygit'
+
 # git alias for dotfiles -------------------------------------------------------
 alias config='git --git-dir=$HOME/.cfg/ --work-tree=$HOME'
 alias config-s='config status'
@@ -55,6 +57,10 @@ alias config-a='config add'
 alias config-c='config commit -m'
 alias config-C='config commit -a -m'
 alias config-p='config push'
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                  University
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # get faster to the bics folders -----------------------------------------------
 alias bics='cd /home/kuni/University/semester_3/BiCS/'
@@ -71,17 +77,27 @@ alias em='cd /home/kuni/University/semester_4/Erasmus/Miscellaneous'
 alias el='cd /home/kuni/University/semester_4/Erasmus/Learning_Agreement'
 
 # TU Wien directories ---------------------------------------------------------
-alias tu='cd /home/kuni/University/semester_4/TU-WIEN'
-alias tua='cd /home/kuni/University/semester_4/TU-WIEN/Articial_Intelligence'
-alias tuv='cd /home/kuni/University/semester_4/TU-WIEN/Visual_Computing'
-alias tuc='cd /home/kuni/University/semester_4/TU-WIEN/Compilers'
-alias tup='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-VO'
-alias tuP='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project'
-alias tus='cd /home/kuni/University/semester_4/TU-WIEN/Security-VU'
-alias tuS='cd /home/kuni/University/semester_4/TU-WIEN/Security-UE'
+alias tu='cd /home/kuni/University/semester_4/TU-WIEN && lfcd'
+alias tua='cd /home/kuni/University/semester_4/TU-WIEN/Articial_Intelligence && lfcd'
+alias tuv='cd /home/kuni/University/semester_4/TU-WIEN/Visual_Computing && lfcd'
+alias tuc='cd /home/kuni/University/semester_4/TU-WIEN/Compilers && lfcd'
+alias tup='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-VO && lfcd'
+alias tuP='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project && lfcd'
+alias tus='cd /home/kuni/University/semester_4/TU-WIEN/Security-VU && lfcd'
+alias tuS='cd /home/kuni/University/semester_4/TU-WIEN/Security-UE && lfcd'
 
+# SEPM --------------------------------------------------------------------------
 alias sf='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project/ss20_sepm_qse_14/frontend/'
 alias sb='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project/ss20_sepm_qse_14/backend/'
 
+alias rb='(sb && mvn clean compile && mvn spring-boot:run)'
+alias rd='(sb && mvn clean compile && mvn spring-boot:run -Dspring-boot.run.profiles=datagen)'
+alias rt='(cd "$(git rev-parse --show-toplevel)/backend" && mvn clean compile && mvn clean test)'
+
+alias rf='(sf && ng serve)'
+
 # vpn for testbed security server ----------------------------------------------
 alias svpn='sudo openvpn ~/University/semester_4/TU-WIEN/Security-UE/wutctf.ovpn'
+
+# run ssh commmands for compiler server ----------------------------------------
+alias cs='clear && ssh -tq complang'

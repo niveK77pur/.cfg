@@ -15,28 +15,23 @@
 #                                   Start-Up
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-# make screen more reddish at night
-exec redshift -l 49:6 -t 6000:2500
+# # make screen more reddish at night
+# exec redshift -l 49:6 -t 6000:2500
 
-# start network manager
-exec --no-startup-id nm-applet
-
-# random wallpaper when starting i3 and start compositor for transparent
-# terminal background
-exec wal -qi ~/Pictures/i3wallpapers/active \
-        --backend haishoku \
-        --saturate 0.5;\
-exec picom
-# exec_always \
-#     pkill picom;\
-#     wal -qi ~/Pictures/i3wallpapers/active \
+# # random wallpaper when starting i3 and start compositor for transparent
+# # terminal background
+# exec wal -qi ~/Pictures/i3wallpapers/active \
 #         --backend haishoku \
 #         --saturate 0.5;\
-#     picom
+# exec picom
 
 # random wallpaper when starting i3
 # exec feh --randomize --bg-fill ~/Pictures/i3wallpapers/active/
 
+exec initscreen.sh
+
+# start network manager
+exec --no-startup-id nm-applet
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                         Commands for specific windows
@@ -56,6 +51,7 @@ exec picom
 # Open a floating window
 for_window [instance="floating_terminal"] floating enable
 for_window [class="floating_window"] floating enable
+for_window [class="floaty"] floating enable
 
 # Make flowblade's render window float
 for_window [class="Flowbladesinglerender"] floating enable
@@ -63,6 +59,9 @@ for_window [class="Flowbladesinglerender"] floating enable
 # Thunderbird
 for_window [class="Thunderbird" window_role="messageWindow"] floating enable
 for_window [class="Thunderbird" window_role="Msgcompose"] floating enable
+
+# Firefox
+for_window [class="firefox" instance="Places"] floating enable
 
 # cool-retro-term
 for_window [class="Cool-Retro-Term-1.1.1-x86_64.AppImage" title="Settings"] floating enable
@@ -128,11 +127,11 @@ bindsym $mod+m exec i3-input -F '[con_mark="%s"] focus' -l 1 -P 'Goto: '
 # Fonts ------------------------------------------------------------------------
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+# font pango:monospace 8
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-#font pango:DejaVu Sans Mono 8
+font pango:DejaVu Sans Mono 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -280,10 +279,7 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning \
     "
 
 # reload a new background
-bindsym $mod+Mod1+r exec \
-        wal -qi ~/Pictures/i3wallpapers/active \
-                --backend haishoku \
-                --saturate 0.5;
+bindsym $mod+Mod1+r exec initscreen.sh
                 
 # edit config files
 bindsym $mod+ctrl+c exec edit_configs.sh
@@ -318,8 +314,8 @@ mode "window-ops" { #{{{
     bindsym f floating toggle
 
     # take a screenshot
-    bindsym --release s       mode "default"; exec --no-startup-id "import              ~/Pictures/VinLudensScreenshot.png"
-    bindsym --release Shift+s mode "default"; exec --no-startup-id "import -window root ~/Pictures/VinLudensScreenshot.png"
+    bindsym --release s       mode "default"; exec --no-startup-id "sleep 0.15; import         ~/Pictures/VinLudensScreenshot.png"
+    bindsym --release Shift+s mode "default"; exec --no-startup-id "sleep 0.15; import -screen ~/Pictures/VinLudensScreenshot.png"
 
     # back to normal
     bindsym Return  mode "default"
@@ -341,19 +337,21 @@ mode "system-ops" { #{{{
     bindsym 0 exec --no-startup-id  xbacklight -set 100
 
     # system volume
-    bindsym $mod+1 exec --no-startup-id     amixer -qD pulse sset Master  10%
-    bindsym $mod+2 exec --no-startup-id     amixer -qD pulse sset Master  20%
-    bindsym $mod+3 exec --no-startup-id     amixer -qD pulse sset Master  30%
-    bindsym $mod+4 exec --no-startup-id     amixer -qD pulse sset Master  40%
-    bindsym $mod+5 exec --no-startup-id     amixer -qD pulse sset Master  50%
-    bindsym $mod+6 exec --no-startup-id     amixer -qD pulse sset Master  60%
-    bindsym $mod+7 exec --no-startup-id     amixer -qD pulse sset Master  70%
-    bindsym $mod+8 exec --no-startup-id     amixer -qD pulse sset Master  80%
-    bindsym $mod+9 exec --no-startup-id     amixer -qD pulse sset Master  90%
-    bindsym $mod+0 exec --no-startup-id     amixer -qD pulse sset Master 100%
-    bindsym $mod+m exec --no-startup-id     amixer -qD pulse sset Master mute
-    bindsym m      exec --no-startup-id     amixer -qD pulse sset Master unmute
-    bindsym t      exec --no-startup-id     amixer -qD pulse sset Master toggle
+    bindsym $mod+$up    exec --no-startup-id     amixer -qD pulse sset Master   1%+
+    bindsym $mod+$down  exec --no-startup-id     amixer -qD pulse sset Master   1%-
+    bindsym $mod+1      exec --no-startup-id     amixer -qD pulse sset Master  10%
+    bindsym $mod+2      exec --no-startup-id     amixer -qD pulse sset Master  20%
+    bindsym $mod+3      exec --no-startup-id     amixer -qD pulse sset Master  30%
+    bindsym $mod+4      exec --no-startup-id     amixer -qD pulse sset Master  40%
+    bindsym $mod+5      exec --no-startup-id     amixer -qD pulse sset Master  50%
+    bindsym $mod+6      exec --no-startup-id     amixer -qD pulse sset Master  60%
+    bindsym $mod+7      exec --no-startup-id     amixer -qD pulse sset Master  70%
+    bindsym $mod+8      exec --no-startup-id     amixer -qD pulse sset Master  80%
+    bindsym $mod+9      exec --no-startup-id     amixer -qD pulse sset Master  90%
+    bindsym $mod+0      exec --no-startup-id     amixer -qD pulse sset Master 100%
+    bindsym $mod+m      exec --no-startup-id     amixer -qD pulse sset Master mute
+    bindsym m           exec --no-startup-id     amixer -qD pulse sset Master unmute
+    bindsym t           exec --no-startup-id     amixer -qD pulse sset Master toggle
 
     # show system info
     bindsym --release i exec --no-startup-id notify-send \

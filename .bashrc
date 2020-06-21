@@ -112,8 +112,8 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.config/bash/bash_aliases ]; then
+    . ~/.config/bash/bash_aliases
 fi
 
 # enable programmable completion features (you don't need to enable
@@ -240,24 +240,6 @@ export reset=`echo -en "\e(B\e[m"` # \e[00m
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 # export FZF_DEFAULT_COMMAND="find"
 export FZF_DEFAULT_COMMAND='rg --files'
-
-# Homework on machine learning -------------------------------------------------
-goconda() {
-    # >>> conda initialize >>>
-    # !! Contents within this block are managed by 'conda init' !!
-    __conda_setup="$('/home/kuni/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
-    else
-        if [ -f "/home/kuni/anaconda3/etc/profile.d/conda.sh" ]; then
-            . "/home/kuni/anaconda3/etc/profile.d/conda.sh"
-        else
-            export PATH="/home/kuni/anaconda3/bin:$PATH"
-        fi
-    fi
-    unset __conda_setup
-    # <<< conda initialize <<<
-}
 
 # pywal ------------------------------------------------------------------------
 if xset q &>/dev/null;

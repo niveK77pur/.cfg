@@ -1,3 +1,7 @@
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                   Settings
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 # interpreter for shell commands (needs to be POSIX compatible)
 set shell sh
 
@@ -23,18 +27,43 @@ set ifs "\n"
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
 
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                   Mappings
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 # use enter for shell commands
 map <enter> shell
 
+# # dedicated keys for file opener actions
+# map o &mimeopen $f
+# map O $mimeopen --ask $f
+
+# Actions in lf ----------------------------------------------------------------
 # execute current file (must be executable)
 map x $$f
 map X !$f
 
-# dedicated keys for file opener actions
-map o &mimeopen $f
-map O $mimeopen --ask $f
+# delete selected files
+map D delete
 
-# define a custom 'open' command
+# navigate using fzf
+map <a-F> :fzf_jump
+map <a-f> :fzf_go
+map <a-c> :fzf_cd_shell
+map <a-r> :fzf_grep
+
+# Quick access to programs -----------------------------------------------------
+# open lazygit
+map L $lazygit
+
+# open $EDITOR
+map E $$EDITOR $fs
+
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+#                                   Commands
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+# define a custom 'open' command -----------------------------------------------
 # This command is called when current file is not a directory. You may want to
 # use either file extensions and/or mime types here. Below uses an editor for
 # text files and a file opener for the rest.
@@ -46,6 +75,10 @@ cmd open ${{
         vlink)          vlc --quiet "$(< $f)" &> /dev/null & exit;;
         link)           firefox "$(< $f)"; exit;;
         md)             typora $f & exit;;
+        ps)             evince $f & exit;;
+        flb)            flowblade $f & exit;;
+        blend*)         blender $f & exit;;
+        pcapng)         wireshark $f & exit;;
     esac
 
     # based on mime type
@@ -53,34 +86,12 @@ cmd open ${{
         text/*)             $EDITOR $fx;;
         application/pdf)    zathura $fx &;;
         image/svg*)         inkscape $f &;;
+        image/*)            feh $f &;;
         *)                  for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
 
-# define a custom 'rename' command without prompt for overwrite
-# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
-# map r push :rename<space>
-
-# make sure trash folder exists
-# %mkdir -p ~/.trash
-
-# move current file or selected files to trash folder
-# (also see 'man mv' for backup/overwrite options)
-cmd trash %set -f; mv $fx ~/.trash
-
-# define a custom 'delete' command
-# cmd delete ${{
-#     set -f
-#     printf "$fx\n"
-#     printf "delete?[y/n]"
-#     read ans
-#     [ $ans = "y" ] && rm -rf $fx
-# }}
-
-# use '<delete>' key for either 'trash' or 'delete' command
-# map <delete> trash
-# map <delete> delete
-
+# Archives ---------------------------------------------------------------------
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
 cmd extract ${{
@@ -121,3 +132,64 @@ cmd 7z ${{
     7z a $1 $1
     rm -rf $1
 }}
+
+# Fuzzy Finder -----------------------------------------------------------------
+cmd fzf_jump ${{
+    # res="$(find . -maxdepth 1 | fzf --reverse --header='Jump to location (maxdepth=1)')"
+    res="$(sk -c 'find -maxdepth 1' --reverse --header='Jump to location (maxdepth=1)')"
+    if [ -f "$res" ]; then
+        cmd="select"
+    elif [ -d "$res" ]; then
+        cmd="cd"
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd fzf_go ${{
+    # res="$(find */* | fzf --reverse --header='Jump to location')"
+    # res="$(sk -c 'find */*' --reverse --header='Jump to location')"
+    res="$(sk -c 'rg --files' --reverse --header='Jump to location')"
+    if [ -f "$res" ]; then
+        cmd="select"
+    elif [ -d "$res" ]; then
+        cmd="cd"
+    fi
+    lf -remote "send $id $cmd \"$res\""
+}}
+
+cmd fzf_cd_shell ${{
+    # res="$(__fzf_cd__)"
+    res="$(sk -c 'find -type d')"
+    lf -remote "send $id cd \"$res\""
+}}
+
+cmd fzf_grep ${{
+    res="$(sk -c 'rg "{}"' | awk -F":" '{print $1}')"
+    lf -remote "send $id select \"$res\""
+}}
+
+# Miscellaneous ----------------------------------------------------------------
+# define a custom 'rename' command without prompt for overwrite
+# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
+# map r push :rename<space>
+
+# make sure trash folder exists
+# %mkdir -p ~/.trash
+
+# move current file or selected files to trash folder
+# (also see 'man mv' for backup/overwrite options)
+# cmd trash %set -f; mv $fx ~/.trash
+
+# # define a custom 'delete' command
+# cmd delete ${{
+#     set -f
+#     printf "$fx\n"
+#     printf "delete?[y/n]"
+#     read ans
+#     [ $ans = "y" ] && rm -rf $fx
+# }}
+
+# use '<delete>' key for either 'trash' or 'delete' command
+# map <delete> trash
+# map <delete> delete
+
