@@ -4,6 +4,7 @@ directories=(
     alacritty/
     i3/
     lf/
+    bash/
 )
 
 

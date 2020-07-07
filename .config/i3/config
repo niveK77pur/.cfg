@@ -72,6 +72,7 @@ for_window [class="MATLAB R2019b - academic use" instance="sun-awt-X11-XFramePee
 
 # Marking windows -------------------------------------------------------------- 
 for_window [class="discord"] mark d
+for_window [class="frescobaldi"] mark f
 
 # }}}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -237,7 +237,8 @@ export reset=`echo -en "\e(B\e[m"` # \e[00m
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # Fuzzy finder -----------------------------------------------------------------
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
 # export FZF_DEFAULT_COMMAND="find"
 export FZF_DEFAULT_COMMAND='rg --files'
 
@@ -247,4 +248,8 @@ then
     (cat ~/.cache/wal/sequences &)
 fi
 
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash ] && source "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
+# autojump ---------------------------------------------------------------------
+[[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
+
+# chroot
+CHROOT="$HOME/chroot"

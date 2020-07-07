@@ -15,8 +15,8 @@ alias playground-terminal='cd ~/Desktop/PLAYGROUND_TERMINAL/'
 alias nmr='sudo service network-manager restart'
 
 # usb related ------------------------------------------------------------------
-alias usbstick="cd /media/$USER/BIEWESCH_K/"
-alias gvimportable="/media/$USER/BIEWESCH_K/gVimPortable7.4/gVimPortable.exe"
+alias usbstick="cd /run/media/$USER/BIEWESCH_K/"
+alias gvimportable="/run/media/$USER/BIEWESCH_K/gVimPortable7.4/gVimPortable.exe"
 
 # mount related ----------------------------------------------------------------
 alias go-mtp="cd /run/user/$UID/gvfs"
@@ -91,7 +91,7 @@ alias sf='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/S
 alias sb='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project/ss20_sepm_qse_14/backend/'
 
 alias rb='(sb && mvn clean compile && mvn spring-boot:run)'
-alias rd='(sb && mvn clean compile && mvn spring-boot:run -Dspring-boot.run.profiles=datagen)'
+alias rd='(sb && rm -rf database && mvn clean compile && mvn spring-boot:run -Dspring-boot.run.profiles=datagen)'
 alias rt='(cd "$(git rev-parse --show-toplevel)/backend" && mvn clean compile && mvn clean test)'
 
 alias rf='(sf && ng serve)'

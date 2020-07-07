@@ -6,6 +6,12 @@
 #                                   Functions
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+dmenu-select() {
+    prompt="$1"
+    shift
+    echo cancel $@ | tr " " "\n" | dmenu -p "$prompt"
+}
+
 getInfo() (
     notify-send \
         "Brightness: $(xbacklight)\n$(\
