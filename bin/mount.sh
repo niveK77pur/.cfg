@@ -12,10 +12,11 @@ dmenu-select() {
 
 
 get-mount-location() {
-    echo $1 | sed 's/.*(\(.\+\))$/\1/'
+    echo $1 | sed 's/.* (\(.\+\))$/\1/'
 }
 
 set-mount-status() {
+    # replace '(?)' to indicate if a device is already mounted or not
     case "$1" in 
         "mtp") while read selection; do
                 location="$(get-mount-location "$selection")"
@@ -39,24 +40,26 @@ set-mount-status() {
 }
 
 mount-list() {
+    # get a list of USB and MTP devices
     lsusb \
         | grep '(MTP)' \
-        | sed 's#Bus \(...\) Device \(...\).*:[0-9a-f]\{4\} \(.*\) (MTP)#MTP(?)    \3 (\1:\2)#' \
+        | sed 's#Bus \(...\) Device \(...\).*:.... \(.*\) (MTP)#MTP(?)    \3 (\1:\2)#' \
         | set-mount-status mtp
-    lsblk -o LABEL,SIZE,PATH \
+    lsblk -o PATH,LABEL,SIZE \
         | grep -E '/dev/sdb[0-9]+' \
-        | sed 's#\(.*\) \(/.*[0-9]\+\)#USB(?)    \1 (\2)#' \
+        | sed 's#\(/.*[0-9]\+\) \(.*\)#USB(?)    \2 (\1)#' \
         | set-mount-status usb
 }
 
 mount-select() {
+    # mount or unmount selected device
     selection="$(mount-list | dmenu-select)"
     location="$(get-mount-location "$selection")"
     case "$(echo $selection | awk '{print $1}')" in
-        "MTP($MOUNTED_SYM)")    gio mount -u "mtp://[usb:$location]" ;;
-        "MTP($UNMOUNTED_SYM)")  gio mount "mtp://[usb:$location]" ;;
-        "USB($MOUNTED_SYM)")    udisksctl unmount -b "$location" ;;
-        "USB($UNMOUNTED_SYM)")  udisksctl mount -b "$location" ;;
+        "MTP($MOUNTED_SYM)")    gio mount -u "mtp://[usb:$location]" && notify-send "Unmounted $location" ;;
+        "MTP($UNMOUNTED_SYM)")  gio mount "mtp://[usb:$location]"    && notify-send "Mounted $location" ;;
+        "USB($MOUNTED_SYM)")    udisksctl unmount -b "$location"     && notify-send "Unmounted $location" ;;
+        "USB($UNMOUNTED_SYM)")  udisksctl mount -b "$location"       && notify-send "Mounted $location" ;;
     esac
 }
 
