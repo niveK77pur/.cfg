@@ -285,6 +285,9 @@ bindsym $mod+Mod1+r exec initscreen.sh
 # edit config files
 bindsym $mod+ctrl+c exec edit_configs.sh
 
+# edit clipboard
+bindsym $mod+Mod1+c exec clipe
+
 # }}}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                     Modes
@@ -355,10 +358,10 @@ mode "system-ops" { #{{{
     bindsym t           exec --no-startup-id     amixer -qD pulse sset Master toggle
 
     # show system info
-    bindsym --release i exec --no-startup-id notify-send \
-        "Brightness: $(xbacklight)\n$(amixer -D pulse sget Master \
-        | awk -F ' ' '$6 == "[on]" || $6 == "[off]" {print "Volume " $1 " " $2 " " $5 " " $6}')"
-    
+    bindsym --release i exec --no-startup-id notify-send "$(printf "Brightness:\t\t%s\n%s" \
+        "$(xbacklight || echo ??)" \
+        "$(amixer -D pulse sget Master | awk -F ' ' '$6 == "[on]" || $6 == "[off]" {print "Volume " $1 " " $2 "\t" $5 " " $6}')" \
+        )"
 
     # poweroff, reboot, suspend. hibernate machine
     bindsym control+p exec systemctl poweroff
