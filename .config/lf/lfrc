@@ -27,6 +27,8 @@ set ifs "\n"
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
 
+set icons
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                   Mappings
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -70,15 +72,18 @@ map E $$EDITOR $fs
 cmd open ${{
     # based on file extension (string after last '.')
     case ${f##*.} in
-        ytlink|ylink)   firefox "$(< $f)"; exit;;
-        tlink)          firefox "$(< $f)"; exit;;
-        vlink)          vlc --quiet "$(< $f)" &> /dev/null & exit;;
-        link)           firefox "$(< $f)"; exit;;
+        ytlink|ylink)   firefox "$(head -n1 $f)"; exit;;
+        tlink)          firefox "$(head -n1 $f)"; exit;;
+        vlink)          vlc --quiet "$(head -n1 $f)" &> /dev/null & exit;;
+        # wlink)          chromium --app="$(head -n1 $f)" &> /dev/null & exit;;
+        wlink)           firefox --new-window "$(head -n1 $f)"; exit;;
+        link)           firefox "$(head -n1 $f)"; exit;;
         md)             typora $f & exit;;
         ps)             evince $f & exit;;
         flb)            flowblade $f & exit;;
         blend*)         blender $f & exit;;
         pcapng)         wireshark $f & exit;;
+        ipynb)          jupyter-notebook $f;;
     esac
 
     # based on mime type
@@ -86,7 +91,8 @@ cmd open ${{
         text/*)             $EDITOR $fx;;
         application/pdf)    zathura $fx &;;
         image/svg*)         inkscape $f &;;
-        image/*)            feh $f &;;
+        image/*)            feh --scale-down $f &;;
+        video/*)            mpv $f & ;;
         *)                  for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}

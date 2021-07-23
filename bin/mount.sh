@@ -6,6 +6,8 @@ USB_MOUNTPOINT="/run/media/$user"
 MOUNTED_SYM="✓"
 UNMOUNTED_SYM="✗"
 
+NOTIFY_CMD='notify-send '"$(basename $0)"
+
 dmenu-select() {
     dmenu -i -l 20 -p '(un)mount device'
 }
@@ -46,7 +48,7 @@ mount-list() {
         | sed 's#Bus \(...\) Device \(...\).*:.... \(.*\) (MTP)#MTP(?)    \3 (\1:\2)#' \
         | set-mount-status mtp
     lsblk -o PATH,LABEL,SIZE \
-        | grep -E '/dev/sdb[0-9]+' \
+        | grep -E '/dev/sd[b-z][0-9]+|/dev/mmcblk0p[0-9]+' \
         | sed 's#\(/.*[0-9]\+\) \(.*\)#USB(?)    \2 (\1)#' \
         | set-mount-status usb
 }
@@ -56,10 +58,10 @@ mount-select() {
     selection="$(mount-list | dmenu-select)"
     location="$(get-mount-location "$selection")"
     case "$(echo $selection | awk '{print $1}')" in
-        "MTP($MOUNTED_SYM)")    gio mount -u "mtp://[usb:$location]" && notify-send "Unmounted $location" ;;
-        "MTP($UNMOUNTED_SYM)")  gio mount "mtp://[usb:$location]"    && notify-send "Mounted $location" ;;
-        "USB($MOUNTED_SYM)")    udisksctl unmount -b "$location"     && notify-send "Unmounted $location" ;;
-        "USB($UNMOUNTED_SYM)")  udisksctl mount -b "$location"       && notify-send "Mounted $location" ;;
+        "MTP($MOUNTED_SYM)")    gio mount -u "mtp://[usb:$location]" && $NOTIFY_CMD "Unmounted $location" ;;
+        "MTP($UNMOUNTED_SYM)")  gio mount "mtp://[usb:$location]"    && $NOTIFY_CMD "Mounted $location" ;;
+        "USB($MOUNTED_SYM)")    udisksctl unmount -b "$location"     && $NOTIFY_CMD "Unmounted $location" ;;
+        "USB($UNMOUNTED_SYM)")  udisksctl mount -b "$location"       && $NOTIFY_CMD "Mounted $location" ;;
     esac
 }
 

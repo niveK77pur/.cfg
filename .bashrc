@@ -162,7 +162,7 @@ ranger-cd() {
 # Python -----------------------------------------------------------------------
 pyvirtualenvwrapper() {
     # more python virtualenv specific commands
-    source /usr/local/bin/virtualenvwrapper.sh
+    source /home/kuni/.local/bin/virtualenvwrapper.sh
 }
 
 
@@ -175,6 +175,23 @@ hr() {
     local cols=${COLUMNS:-$(tput cols)}
     while ((${#line} < cols)); do line+="$line"; done
     printf '%s%s%s\n' "$start" "${line:0:cols}" "$end"
+}
+
+goconda() {
+    # >>> conda initialize >>>
+    # !! Contents within this block are managed by 'conda init' !!
+    __conda_setup="$('/home/kuni/anaconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
+    else
+        if [ -f "/home/kuni/anaconda3/etc/profile.d/conda.sh" ]; then
+            . "/home/kuni/anaconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/home/kuni/anaconda3/bin:$PATH"
+        fi
+    fi
+    unset __conda_setup
+    # <<< conda initialize <<<
 }
 
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -232,6 +249,9 @@ export WHITE=`echo -en "\e[107m"`               ###
 export DEFAULT=`echo -en "\e[49m"`              ###
 export reset=`echo -en "\e(B\e[m"` # \e[00m
 
+# LF icons ---------------------------------------------------------------------
+[ -f "$HOME/.config/lf/icons.sh" ] && source "$HOME/.config/lf/icons.sh" 
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                               Program Settings
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -243,13 +263,19 @@ export reset=`echo -en "\e(B\e[m"` # \e[00m
 export FZF_DEFAULT_COMMAND='rg --files'
 
 # pywal ------------------------------------------------------------------------
-if xset q &>/dev/null;
-then
-    (cat ~/.cache/wal/sequences &)
-fi
+# if xset q &>/dev/null;
+# then
+#     (cat ~/.cache/wal/sequences &)
+# fi
 
-# autojump ---------------------------------------------------------------------
-[[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
+# autojump/z ---------------------------------------------------------------------
+# [[ -s /etc/profile.d/autojump.sh ]] && source /etc/profile.d/autojump.sh
+[[ -s /usr/share/z/z.sh ]] && source /usr/share/z/z.sh
 
 # chroot
 CHROOT="$HOME/chroot"
+
+
+# PATH=$PATH:/home/kuni/.local/bin/bin;export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - RealTime-At-Work RTaW-Sim 1.4.13 (Starter) DAAFF252-216B-107D-F1E5-3E22F3C424D6
+
+# PATH=$PATH:/home/kuni/RTaW/RTaW-Sim-1.4.13-Starter/bin;export PATH; # ADDED BY INSTALLER - DO NOT EDIT OR DELETE THIS COMMENT - RealTime-At-Work RTaW-Sim 1.4.13 (Starter) 331454D4-2DA4-BCAE-7FA4-A780A5206F9B

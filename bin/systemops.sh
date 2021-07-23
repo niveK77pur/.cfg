@@ -12,15 +12,15 @@ dmenu-select() {
     echo cancel $@ | tr " " "\n" | dmenu -p "$prompt"
 }
 
-getInfo() (
-    notify-send \
-        "Brightness: $(xbacklight)\n$(\
-        amixer -D pulse sget Master \
-        | awk -F ' ' '$6 == "[on]" || $6 == "[off]" {print "Volume " $1 " " $2 " " $5 " " $6}'\
-        )\n$(\
-        upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|percentage"
-        )"
-)
+# getInfo() (
+#     notify-send \
+#         "Brightness: $(xbacklight)\n$(\
+#         amixer -D pulse sget Master \
+#         | awk -F ' ' '$6 == "[on]" || $6 == "[off]" {print "Volume " $1 " " $2 " " $5 " " $6}'\
+#         )\n$(\
+#         upower -i /org/freedesktop/UPower/devices/battery_BAT0| grep -E "state|percentage"
+#         )"
+# )
 
 controlBrightness() (
     value=$(dmenu-select "Brightness" {1..9} 0)
@@ -78,7 +78,7 @@ functionality=$(dmenu-select "system ops" info brightness volume state)
 
 case "$functionality" in
     cancel)     exit 0 ;;
-    info)       getInfo ;;
+    info)       $HOME/bin/sysinfo.sh ;;
     brightness) controlBrightness ;;
     volume)     controlVolume ;;
     state)      controlState ;;

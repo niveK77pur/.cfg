@@ -50,8 +50,9 @@ exec --no-startup-id nm-applet
 # Floating windows -------------------------------------------------------------
 # Open a floating window
 for_window [instance="floating_terminal"] floating enable
-for_window [class="floating_window"] floating enable
+for_window [instance="floaty"] floating enable
 for_window [class="floaty"] floating enable
+for_window [class="floating_window"] floating enable
 
 # Make flowblade's render window float
 for_window [class="Flowbladesinglerender"] floating enable
@@ -73,6 +74,7 @@ for_window [class="MATLAB R2019b - academic use" instance="sun-awt-X11-XFramePee
 # Marking windows -------------------------------------------------------------- 
 for_window [class="discord"] mark d
 for_window [class="frescobaldi"] mark f
+for_window [class="Anydesk"] mark a
 
 # }}}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -154,6 +156,7 @@ floating_modifier $mod
 
 # Gaps -------------------------------------------------------------------------
 gaps inner 20
+smart_gaps on
 
 # Window borders ---------------------------------------------------------------
 default_border pixel 2
@@ -169,8 +172,11 @@ client.focused  #e68a00  #e68a00  #ffffff  #ffbe8c    #e68a00
 # {{{
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return       exec i3-sensible-terminal
 bindsym $mod+Shift+Return exec i3-sensible-terminal --class 'floating_terminal'
+# launch terminal with nvim GhostText
+bindsym $mod+g       exec i3-sensible-terminal --command nvim +GhostStart
+bindsym $mod+Shift+g exec i3-sensible-terminal --class 'floaty' --command nvim +GhostStart
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -233,7 +239,7 @@ bindsym $mod+e layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+f                floating toggle
-bindsym --whole-window $mod+button3 floating toggle
+# bindsym --whole-window $mod+button3 floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
@@ -286,17 +292,23 @@ bindsym $mod+Mod1+r exec initscreen.sh
 bindsym $mod+ctrl+c exec edit_configs.sh
 
 # edit clipboard
-bindsym $mod+Mod1+c exec clipe
+bindsym $mod+Mod1+c exec cedit
+
+# toggle dunst notifications
+bindsym $mod+F1         exec dunst-toggle.sh
+bindsym $mod+F2         exec dunstctl history-pop
+bindsym $mod+F3         exec dunstctl close
+bindsym $mod+shift+F3   exec dunstctl close-all
 
 # }}}
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                     Modes
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-# {{{
+# {{{ notify-send test
 
 # various operations on screen
 bindsym $mod+x mode "window-ops"
-mode "window-ops" { #{{{
+mode "window-ops" { #{{{ notify-send test
     # These bindings trigger as soon as you enter the resize mode
 
     # Pressing left will shrink the window’s width.
@@ -318,8 +330,8 @@ mode "window-ops" { #{{{
     bindsym f floating toggle
 
     # take a screenshot
-    bindsym --release s       mode "default"; exec --no-startup-id "sleep 0.15; import         ~/Pictures/VinLudensScreenshot.png"
-    bindsym --release Shift+s mode "default"; exec --no-startup-id "sleep 0.15; import -screen ~/Pictures/VinLudensScreenshot.png"
+    bindsym --release s       mode "default"; exec --no-startup-id "sleep 0.15; screenshot.sh"
+    bindsym --release Shift+s mode "default"; exec --no-startup-id "sleep 0.15; screenshot.sh f"
 
     # back to normal
     bindsym Return  mode "default"
@@ -358,16 +370,22 @@ mode "system-ops" { #{{{
     bindsym t           exec --no-startup-id     amixer -qD pulse sset Master toggle
 
     # show system info
-    bindsym --release i exec --no-startup-id notify-send "$(printf "Brightness:\t\t%s\n%s" \
-        "$(xbacklight || echo ??)" \
-        "$(amixer -D pulse sget Master | awk -F ' ' '$6 == "[on]" || $6 == "[off]" {print "Volume " $1 " " $2 "\t" $5 " " $6}')" \
-        )"
+    bindsym --release i mode "default"; exec --no-startup-id sysinfo.sh
+    # bindsym --release i exec --no-startup-id notify-send \
+    #     --icon="/usr/share/icons/Adwaita/32x32/devices/computer-symbolic.symbolic.png"\
+    #     "System Information"\
+    #     "$(printf "%s\n%s\n%s" \
+    #         "$(echo "Brightness:\t\t$(xbacklight -get || echo ??)")" \
+    #         "$(acpi --battery | sed 's#^\(.*:\)\s*#\1\t\t#')" \
+    #         "$(amixer -D pulse sget Master | awk -F " " '$6 == "[on]" || $6 == "[off]" {print "Volume " $1 " " $2 "\t" $5 " " $6}')" \
+    #     )"
 
     # poweroff, reboot, suspend. hibernate machine
     bindsym control+p exec systemctl poweroff
     bindsym control+r exec systemctl reboot
     # bindsym control+s mode "default"; exec /opt/i3lockmore/i3lockmore --image-fill "/home/kuni/Pictures/i3wallpapers/lockscreen/ludens-1576411224708-9031.jpg" && systemctl suspend
-    bindsym control+s mode "default"; exec i3lock -c $(head -n1 ~/.cache/wal/colors) && systemctl suspend
+    # bindsym control+s mode "default"; exec i3lock -c $(head -n1 ~/.cache/wal/colors) && systemctl suspend
+    bindsym control+s mode "default"; exec i3lock -i ~/Pictures/i3wallpapers/lockscreen/lastofusgiraffe.png && systemctl suspend
     bindsym control+h mode "default"; exec i3lock && systemctl hibernate
     bindsym control+F12 exec "i3-nagbar -t warning \
         -m 'Power off machine?' \

@@ -45,7 +45,7 @@ alias tk='tmux kill-session -t'
 # herbstclient -----------------------------------------------------------------
 alias hc="herbstclient"
 
-alias vagrant='~/BSP/Semester_1/Vagrant_VM/missaleneous/Vagrant_download/vagrant'
+# alias vagrant='~/BSP/Semester_1/Vagrant_VM/missaleneous/Vagrant_download/vagrant'
 
 # LazyGit ----------------------------------------------------------------------
 alias lg='lazygit'
@@ -58,46 +58,61 @@ alias config-c='config commit -m'
 alias config-C='config commit -a -m'
 alias config-p='config push'
 
+# feh --------------------------------------------------------------------------
+alias feh='feh --scale-down'
+
+# Jupyter ----------------------------------------------------------------------
+alias jn='jupyter-notebook'
+
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 #                                  University
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 # get faster to the bics folders -----------------------------------------------
-alias bics='cd /home/kuni/University/semester_3/BiCS/'
-alias bsp='cd /home/kuni/University/semester_3/BSP/'
+alias bics='cd /home/kuni/University/Bachelor/semester_6/BiCS && lfcd'
+alias bsp='cd /home/kuni/University/Bachelor/semester_6/BSP && lfcd'
+
+alias b2='cd /home/kuni/University/Bachelor/semester_6/BiCS/Computational-Science-2 && lfcd'
+alias b3='cd /home/kuni/University/Bachelor/semester_6/BiCS/Computational-Science-3 && lfcd'
+alias bd='cd /home/kuni/University/Bachelor/semester_6/BiCS/Data-Science-for-Humanities && lfcd'
+alias bo='cd /home/kuni/University/Bachelor/semester_6/BiCS/Online-course && lfcd'
+alias bs='cd /home/kuni/University/Bachelor/semester_6/BiCS/Security-2 && lfcd'
+alias be='cd /home/kuni/University/Bachelor/semester_6/BiCS/Sofware-Engineering-2 && lfcd'
+alias bu='cd /home/kuni/University/Bachelor/semester_6/BiCS/User-Centered-Design && lfcd'
 
 # # swift aliases ----------------------------------------------------------------
 # alias sb='swift build'
 # alias sr='swift run'
 # alias se='swift build && swift run'
 
-# get faster to erasmus stuff --------------------------------------------------
-alias ew='cd /home/kuni/University/semester_4/Erasmus/wohnung'
-alias em='cd /home/kuni/University/semester_4/Erasmus/Miscellaneous'
-alias el='cd /home/kuni/University/semester_4/Erasmus/Learning_Agreement'
+# # get faster to erasmus stuff --------------------------------------------------
+# alias ew='cd /home/kuni/University/Bachelor/semester_4/Erasmus/wohnung'
+# alias em='cd /home/kuni/University/Bachelor/semester_4/Erasmus/Miscellaneous'
+# alias el='cd /home/kuni/University/Bachelor/semester_4/Erasmus/Learning_Agreement'
 
-# TU Wien directories ---------------------------------------------------------
-alias tu='cd /home/kuni/University/semester_4/TU-WIEN && lfcd'
-alias tua='cd /home/kuni/University/semester_4/TU-WIEN/Articial_Intelligence && lfcd'
-alias tuv='cd /home/kuni/University/semester_4/TU-WIEN/Visual_Computing && lfcd'
-alias tuc='cd /home/kuni/University/semester_4/TU-WIEN/Compilers && lfcd'
-alias tup='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-VO && lfcd'
-alias tuP='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project && lfcd'
-alias tus='cd /home/kuni/University/semester_4/TU-WIEN/Security-VU && lfcd'
-alias tuS='cd /home/kuni/University/semester_4/TU-WIEN/Security-UE && lfcd'
 
-# SEPM --------------------------------------------------------------------------
-alias sf='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project/ss20_sepm_qse_14/frontend/'
-alias sb='cd /home/kuni/University/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project/ss20_sepm_qse_14/backend/'
+# # TU Wien directories ---------------------------------------------------------
+# alias tu='cd /home/kuni/University/Bachelor/semester_4/TU-WIEN && lfcd'
+# alias tua='cd /home/kuni/University/Bachelor/semester_4/TU-WIEN/Articial_Intelligence && lfcd'
+# alias tuv='cd /home/kuni/University/Bachelor/semester_4/TU-WIEN/Visual_Computing && lfcd'
+# alias tuc='cd /home/kuni/University/Bachelor/semester_4/TU-WIEN/Compilers && lfcd'
+# alias tup='cd /home/kuni/University/Bachelor/semester_4/TU-WIEN/SEPM-VO && lfcd'
+# alias tuP='cd /home/kuni/University/Bachelor/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project && lfcd'
+# alias tus='cd /home/kuni/University/Bachelor/semester_4/TU-WIEN/Security-VU && lfcd'
+# alias tuS='cd /home/kuni/University/Bachelor/semester_4/TU-WIEN/Security-UE && lfcd'
 
-alias rb='(sb && mvn clean compile && mvn spring-boot:run)'
-alias rd='(sb && rm -rf database && mvn clean compile && mvn spring-boot:run -Dspring-boot.run.profiles=datagen)'
-alias rt='(cd "$(git rev-parse --show-toplevel)/backend" && mvn clean compile && mvn clean test)'
+# # SEPM --------------------------------------------------------------------------
+# alias sf='cd /home/kuni/University/Bachelor/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project/ss20_sepm_qse_14/frontend/'
+# alias sb='cd /home/kuni/University/Bachelor/semester_4/TU-WIEN/SEPM-PR/QSE-Gruppenphase/Source-Project/ss20_sepm_qse_14/backend/'
 
-alias rf='(sf && ng serve)'
+# alias rb='(sb && mvn clean compile && mvn spring-boot:run)'
+# alias rd='(sb && rm -rf database && mvn clean compile && mvn spring-boot:run -Dspring-boot.run.profiles=datagen)'
+# alias rt='(cd "$(git rev-parse --show-toplevel)/backend" && mvn clean compile && mvn clean test)'
+
+# alias rf='(sf && ng serve)'
 
 # vpn for testbed security server ----------------------------------------------
-alias svpn='sudo openvpn ~/University/semester_4/TU-WIEN/Security-UE/wutctf.ovpn'
+# alias svpn='sudo openvpn ~/University/Bachelor/semester_4/TU-WIEN/Security-UE/wutctf.ovpn'
 
 # run ssh commmands for compiler server ----------------------------------------
-alias cs='clear && ssh -tq complang'
+# alias cs='clear && ssh -tq complang'

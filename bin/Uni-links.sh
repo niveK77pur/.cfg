@@ -29,18 +29,18 @@ re_enrolment="https://wwwen.uni.lu/students/useful_information_from_a_to_z"
 # owa="https://owa.uni.lu"
 owa="https://outlook.office365.com/owa/uniluxembourg.onmicrosoft.com/0180556255@uniluxembourg.mail.onmicrosoft.com/"
 guichet_etudiant="https://inscription.uni.lu/Inscriptions/Student/GuichetEtudiant"
+guichet_etudiant_schedule="https://inscription.uni.lu/Inscriptions/Student/GuichetEtudiant/Agenda"
 
-moodle="https://moodle.uni.lu/course/index.php?categoryid=633"
+moodle="https://moodle.uni.lu/course/index.php?categoryid=724"
 moodle_courses=(
-    "https://moodle.uni.lu/course/view.php?id=4142" # 0) Online Course
-    "https://moodle.uni.lu/course/view.php?id=3916" # 1) Software Engineering 1
-    "https://moodle.uni.lu/course/view.php?id=3917" # 2) Human-Computer Interaction
-    "https://moodle.uni.lu/course/view.php?id=3918" # 3) Intelligent Systems 2
-    "https://moodle.uni.lu/course/view.php?id=3919" # 4) Information Management 3
-    "https://moodle.uni.lu/course/view.php?id=3920" # 5) Computational Science 1
-    "https://moodle.uni.lu/course/view.php?id=3921" # 6) Natural Language Processing
-    "https://moodle.uni.lu/course/view.php?id=3922" # 7) Bachelor Semester Project 5
-    "https://moodle.uni.lu/course/view.php?id=5011" # 8) Theoretical Computer Science 3
+    "https://moodle.uni.lu/course/view.php?id=4197" # 0) Bachelor Semester Project 6
+    "https://moodle.uni.lu/course/view.php?id=4194" # 1) Computational Science 2
+    "https://moodle.uni.lu/course/view.php?id=4195" # 2) Computational Science 3
+    "https://moodle.uni.lu/course/view.php?id=4193" # 3) Data Science for Humanities
+    "https://moodle.uni.lu/course/view.php?id=4196" # 4) Online course
+    "https://moodle.uni.lu/course/view.php?id=4192" # 5) Security 2
+    "https://moodle.uni.lu/course/view.php?id=4191" # 6) Sofware Engineering 2
+    "https://moodle.uni.lu/course/view.php?id=4332" # 7) User Centered Design
 )
 
 dropbox_students="https://www.dropbox.com/sh/h83eajpydshiqat/AADvnpKPZdGVPUtMoHh03PARa?dl=0&lst"
@@ -51,13 +51,17 @@ slack_bics="https://bicsworld.slack.com/"
 slack_ngjobs="https://ngjobs.slack.com/"
 slack_e4l="https://energy4life.slack.com/"
 slack_rues="https://ruesgrp.slack.com/"
+slack_SE1="https://bics-se1.slack.com/"
+slack_NLP="https://nlppracticechat.slack.com/"
 
 google_docs="https://docs.google.com/document/u/0/"
 google_sheets="https://docs.google.com/spreadsheets/u/0/"
 google_drive_bsp="https://docs.google.com/spreadsheets/d/11y0zILOsMJBMp3zOCdKH0y-IM8qJIyAglVGbygX9X2U/edit#gid=1449240152"
 
-BMT="https://messir.uni.lu/bmt/home"
-bsp_activity_report="https://docs.google.com/spreadsheets/d/1tVj7fNuhFbiy165YyAZ7JQmUji0MuuC932kq9aDGjx0/edit#gid=1449240152"
+# BMT="https://messir.uni.lu/bmt/home"
+BMT="https://bicshub.uni.lu/bmt/openprojectinstance?projectinstanceuuid=32930599-2a87-44d9-9988-7015bd487857"
+bsp_activity_report="https://docs.google.com/spreadsheets/d/14JTc-ntfhgGA7o5_tfX8KhGfKRPY4S6ETqV6uE7pdA8/edit?usp=sharing"
+bsp_landing_document="https://docs.google.com/document/d/16SI_ZbITev8vYIs2RMuOg_JKmN0PVdb6btEGxhUhwgA/edit?usp=sharing"
 
 password_forget_reset="https://inscription.uni.lu/Inscriptions/Public/OubliMDP"
 password_troubleshooting="https://acme.uni.lu/TS"
@@ -69,6 +73,7 @@ helpMessage() {
     message 'dh' "Get more options for dropbox."
     message 'e'  "Update and check personal information, bank account details, etc.
         (Guichet Étudiant)"
+    message 'a'  "See the agenda (course schedule) on Guichet Étudiant."
     message 'gh' "Get more options for google."
     message 'i'  "Access university's intranet for all students."
     message 'mh' "Get more options for moodle."
@@ -91,7 +96,7 @@ passwordHelpMessage(){
 slackHelpMessage(){
     PREDICATE=s
     message 'b' "Goto slack BiCS forum."
-    message 'n' "Goto slack NG Jobs forum."
+    # message 'n' "Goto slack NG Jobs forum."
     message 'e' "Goto slack Energy4Life forum."
     message 'r' "Goto slack rues forum."
     message 'h' "Print this slack help screen and exit."
@@ -116,11 +121,14 @@ googleHelpMessage(){
 moodleHelpMessage(){
     PREDICATE=m
     message 'm' "Collaborative platform for students and teachers. (Moodle)"
-    message 'o' "Online Course"
-    message 's' "Software Engineering 1"
-    message 'h' "Human-Computer Interaction"
-    message 'i' "Intelligent Systems 2"
-    message 'c' "Computational Science 1"
+    message 'b' "Bachelor Semester Project 6"
+    message '2' "Computational Science 2"
+    message '3' "Computational Science 3"
+    message 'd' "Data Science for Humanities"
+    message 'o' "Online course"
+    message 's' "Security 2"
+    message 'e' "Sofware Engineering 2"
+    message 'u' "User Centered Design"
 }
 
 BSPHelpMessage(){
@@ -135,13 +143,14 @@ if [ $# -eq 0 ]
 then
     echo "Use -h to get help about the options."
 else
-    while getopts ieb:rog:m:s:d:jp:ht opt
+    while getopts ieab:rog:m:s:d:jp:ht opt
     do
         case "$opt" in
             i) goto "$intranet";;
             r) goto "$re_enrolment";;
             o) goto "$owa";;
             e) goto "$guichet_etudiant";;
+            a) goto "$guichet_etudiant_schedule";;
             m) 
                 case "$OPTARG" in
                     # a)  i=0
@@ -154,11 +163,14 @@ else
                     #     echo "$i courses opened."
                     #     ;;
                     m) goto "$moodle" ;;
-                    o) goto "${moodle_courses[0]}" ;;
-                    s) goto "${moodle_courses[1]}" ;;
-                    h) goto "${moodle_courses[2]}" ;;
-                    i) goto "${moodle_courses[3]}" ;;
-                    c) goto "${moodle_courses[5]}" ;;
+                    b) goto "${moodle_courses[0]}" ;;  # Bachelor Semester Project 6
+                    2) goto "${moodle_courses[1]}" ;;  # Computational Science 2
+                    3) goto "${moodle_courses[2]}" ;;  # Computational Science 3
+                    d) goto "${moodle_courses[3]}" ;;  # Data Science for Humanities
+                    o) goto "${moodle_courses[4]}" ;;  # Online course
+                    s) goto "${moodle_courses[5]}" ;;  # Security 2
+                    e) goto "${moodle_courses[6]}" ;;  # Sofware Engineering 2
+                    u) goto "${moodle_courses[7]}" ;;  # User Centered Design
                     h) moodleHelpMessage ;;
                 esac
                 ;;
@@ -173,15 +185,18 @@ else
             s)
                 case "$OPTARG" in
                    b) goto "$slack_bics";;
-                   n) goto "$slack_ngjobs";;
+                   # n) goto "$slack_ngjobs";;
                    e) goto "$slack_e4l";;
                    r) goto "$slack_rues";;
+                   s) goto "$slack_SE1" ;;
+                   n) goto "$slack_NLP" ;;
                    h) slackHelpMessage ;;
                 esac
                 ;;
             b)
                 case "$OPTARG" in
                     a) goto "$bsp_activity_report" ;;
+                    l) goto "$bsp_landing_document" ;;
                     b) goto "$BMT" ;;
                     h) BSPHelpMessage ;;
                 esac
